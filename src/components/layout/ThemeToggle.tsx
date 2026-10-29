@@ -3,6 +3,7 @@
 import { toggleTheme } from "@/lib/theme";
 import styles from "./ThemeToggle.module.css";
 
+/** Text switch; both labels are rendered and CSS shows the one for the current theme. */
 export function ThemeToggle() {
   const onClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     const rect = event.currentTarget.getBoundingClientRect();
@@ -11,7 +12,9 @@ export function ThemeToggle() {
 
   return (
     <button type="button" className={styles.toggle} onClick={onClick} aria-label="Toggle colour theme">
-      <span className={styles.disc} aria-hidden="true" />
+      <span className={styles.swatch} aria-hidden="true" />
+      <span className={styles.toDark}>Dark</span>
+      <span className={styles.toLight}>Light</span>
     </button>
   );
 }

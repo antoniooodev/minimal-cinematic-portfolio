@@ -1,13 +1,4 @@
-import type {
-  Capability,
-  Certification,
-  Education,
-  Experience,
-  Profile,
-  Project,
-  Stat,
-  ToolGroup,
-} from "./types";
+import type { Certification, Education, Experience, Profile, Project, ToolGroup } from "./types";
 
 // Every text on the site lives in this file. Replace the placeholder content
 // below with your own to make the template yours.
@@ -15,7 +6,7 @@ import type {
 export const profile: Profile = {
   name: "Alex Morgan",
   role: "Full-Stack Developer",
-  headline: ["interfaces", "products", "design systems", "APIs"],
+  headline: "I design and build *calm, considered* products for the web.",
   location: "Lisbon, Portugal",
   timeZone: "Europe/Lisbon",
   status: "Available for new projects",
@@ -34,51 +25,6 @@ export const profile: Profile = {
     { label: "Dribbble", href: "https://dribbble.com/", handle: "@username" },
   ],
 };
-
-export const stats: Stat[] = [
-  { value: 7, suffix: "+", label: "Years of experience" },
-  { value: 40, suffix: "+", label: "Projects shipped" },
-  { value: 12, label: "Open-source packages" },
-  { value: 100, label: "Lighthouse score" },
-];
-
-export const skills = [
-  "TypeScript",
-  "React",
-  "Next.js",
-  "Node.js",
-  "GraphQL",
-  "PostgreSQL",
-  "Tailwind CSS",
-  "Docker",
-  "AWS",
-  "Figma",
-  "Rust",
-  "Go",
-];
-
-export const capabilities: Capability[] = [
-  {
-    title: "Frontend engineering",
-    description:
-      "Interfaces in React and Next.js that load fast, feel smooth and work for everyone, on every screen.",
-  },
-  {
-    title: "Backend & APIs",
-    description:
-      "Typed, well-documented APIs and data models in Node.js and PostgreSQL that are easy to grow.",
-  },
-  {
-    title: "Design systems",
-    description:
-      "Component libraries and tokens that keep design and code in sync as the product grows.",
-  },
-  {
-    title: "Performance",
-    description:
-      "Audits and fixes for Core Web Vitals, bundle size and rendering, measured before and after.",
-  },
-];
 
 export const toolbox: ToolGroup[] = [
   { group: "Languages", items: ["TypeScript", "JavaScript", "Go", "Rust", "SQL"] },
@@ -199,7 +145,7 @@ export const projects: Project[] = [
     summary:
       "An open-source design system with 60 accessible components, design tokens and a live playground.",
     stack: ["TypeScript", "React", "Storybook"],
-    cover: { from: "#ff6a3d", to: "#ffb347", pattern: "rings" },
+    cover: { tone: "crimson", pattern: "rings" },
     repo: "https://github.com/",
     url: "https://example.com",
     featured: true,
@@ -212,7 +158,7 @@ export const projects: Project[] = [
     summary:
       "Real-time analytics dashboard that turns millions of events into clear, shareable reports.",
     stack: ["Next.js", "GraphQL", "PostgreSQL"],
-    cover: { from: "#3d5afe", to: "#8c9eff", pattern: "grid" },
+    cover: { tone: "espresso", pattern: "grid" },
     url: "https://example.com",
     featured: true,
   },
@@ -224,7 +170,7 @@ export const projects: Project[] = [
     summary:
       "A tiny, type-safe event bus for TypeScript with zero dependencies and first-class React bindings.",
     stack: ["TypeScript", "Node.js"],
-    cover: { from: "#00b894", to: "#55efc4", pattern: "waves" },
+    cover: { tone: "sand", pattern: "waves" },
     repo: "https://github.com/",
     featured: true,
   },
@@ -236,7 +182,7 @@ export const projects: Project[] = [
     summary:
       "A calm weather app built as a progressive web app, with offline support and animated forecasts.",
     stack: ["React", "PWA", "Canvas"],
-    cover: { from: "#6c5ce7", to: "#a29bfe", pattern: "dots" },
+    cover: { tone: "cocoa", pattern: "dots" },
     url: "https://example.com",
     featured: true,
   },
@@ -248,7 +194,7 @@ export const projects: Project[] = [
     summary:
       "Personal finance tracker with bank sync, budgets and a fast keyboard-first interface.",
     stack: ["Next.js", "Node.js", "PostgreSQL"],
-    cover: { from: "#1e272e", to: "#636e72", pattern: "bars" },
+    cover: { tone: "sand", pattern: "bars" },
     repo: "https://github.com/",
   },
   {
@@ -259,7 +205,7 @@ export const projects: Project[] = [
     summary:
       "Command-line tool that scaffolds, tests and deploys monorepo packages with one command.",
     stack: ["Go", "Docker", "GitHub Actions"],
-    cover: { from: "#e84393", to: "#fd79a8", pattern: "rings" },
+    cover: { tone: "crimson", pattern: "waves" },
     repo: "https://github.com/",
   },
   {
@@ -270,7 +216,7 @@ export const projects: Project[] = [
     summary:
       "Award-winning website for a contemporary art museum, with WebGL transitions and a CMS.",
     stack: ["Vue", "WebGL", "Headless CMS"],
-    cover: { from: "#fdcb6e", to: "#e17055", pattern: "waves" },
+    cover: { tone: "cocoa", pattern: "rings" },
     url: "https://example.com",
   },
   {
@@ -281,7 +227,7 @@ export const projects: Project[] = [
     summary:
       "Lightweight uptime monitor with status pages, alerts and a public API.",
     stack: ["Rust", "Redis", "AWS"],
-    cover: { from: "#0984e3", to: "#00cec9", pattern: "grid" },
+    cover: { tone: "espresso", pattern: "bars" },
     repo: "https://github.com/",
   },
 ];

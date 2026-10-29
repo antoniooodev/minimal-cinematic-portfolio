@@ -4,19 +4,19 @@ import styles from "./not-found.module.css";
 
 export default function NotFound() {
   return (
-    <section className={`container ${styles.wrap}`}>
-      <p className="mono" data-reveal>
+    <section className={`container row ${styles.wrap}`}>
+      <p className="label" data-reveal>
         Error 404
       </p>
-      <h1 className={styles.title}>
-        <SplitText text="Lost in" delay={1} /> <SplitText text="space." className="serif accent" delay={2} />
-      </h1>
-      <p className={styles.text} data-reveal style={{ "--d": 3 } as React.CSSProperties}>
-        The page you are looking for has moved or never existed.
-      </p>
-      <Link href="/" className={styles.button} data-reveal style={{ "--d": 4 } as React.CSSProperties}>
-        Back to home →
-      </Link>
+      <div>
+        <SplitText as="h1" text="This page is *missing.*" className={`display ${styles.title}`} delay={1} />
+        <p className={styles.text} data-reveal style={{ "--d": 3 } as React.CSSProperties}>
+          It may have moved, or it never existed.{" "}
+          <Link href="/" className="link-line">
+            Back to home
+          </Link>
+        </p>
+      </div>
     </section>
   );
 }

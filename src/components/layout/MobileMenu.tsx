@@ -38,8 +38,8 @@ export function MobileMenu({ open, pathname, onClose }: Props) {
                 aria-current={trimSlash(item.href) === pathname ? "page" : undefined}
                 onClick={onClose}
               >
-                <span className={`mono ${styles.index}`}>{pad(index)}</span>
-                <span className={styles.label}>{item.label}</span>
+                <span className="label">{pad(index + 1)}</span>
+                <span className={`display ${styles.text}`}>{item.label}</span>
               </Link>
             </li>
           ))}
@@ -47,14 +47,14 @@ export function MobileMenu({ open, pathname, onClose }: Props) {
       </nav>
 
       <div className={styles.footer}>
-        <a href={`mailto:${profile.email}`} className={styles.email}>
+        <a href={`mailto:${profile.email}`} className="link-line">
           {profile.email}
         </a>
         <ul className={styles.socials}>
           {profile.links.map((link) => (
             <li key={link.href}>
-              <a href={link.href} className="mono" target="_blank" rel="noreferrer">
-                {link.label} ↗
+              <a href={link.href} target="_blank" rel="noreferrer">
+                {link.label}
               </a>
             </li>
           ))}

@@ -1,33 +1,41 @@
 .toggle {
-  display: grid;
-  place-items: center;
-  width: 38px;
-  height: 38px;
-  padding: 0;
-  border: 1px solid var(--line-strong);
-  border-radius: 50%;
-  background: transparent;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 0;
+  border: 0;
+  background: none;
+  font-size: 14px;
+  color: var(--muted);
   cursor: pointer;
-  transition:
-    border-color 0.3s var(--ease),
-    transform 0.6s var(--ease-out);
+  transition: color 0.3s var(--ease);
 }
 
 .toggle:hover {
-  border-color: var(--fg);
-  transform: rotate(180deg);
+  color: var(--ink);
 }
 
-/* A half-filled disc: the filled side flips with the theme. */
-.disc {
-  width: 14px;
-  height: 14px;
+/* Half crimson, half cocoa: a tiny sample of the palette. */
+.swatch {
+  width: 12px;
+  height: 12px;
   border-radius: 50%;
-  border: 1.5px solid currentColor;
-  background: linear-gradient(90deg, currentColor 50%, transparent 50%);
-  transition: transform 0.6s var(--ease-out);
+  background: linear-gradient(90deg, var(--crimson) 50%, var(--cocoa) 50%);
+  transition: transform 0.6s var(--ease);
 }
 
-:global([data-theme="dark"]) .disc {
+.toggle:hover .swatch {
   transform: rotate(180deg);
+}
+
+.toLight {
+  display: none;
+}
+
+:global([data-theme="dark"]) .toDark {
+  display: none;
+}
+
+:global([data-theme="dark"]) .toLight {
+  display: inline;
 }

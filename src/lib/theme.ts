@@ -30,13 +30,7 @@ export function toggleTheme(origin?: { x: number; y: number }) {
   transition.ready.then(() => {
     document.documentElement.animate(
       { clipPath: [`circle(0px at ${x}px ${y}px)`, `circle(${radius}px at ${x}px ${y}px)`] },
-      { duration: 700, easing: "cubic-bezier(0.16, 1, 0.3, 1)", pseudoElement: "::view-transition-new(root)" },
+      { duration: 700, easing: "cubic-bezier(0.22, 1, 0.36, 1)", pseudoElement: "::view-transition-new(root)" },
     );
   });
-}
-
-export const PALETTE_EVENT = "palette:open";
-
-export function openPalette() {
-  window.dispatchEvent(new Event(PALETTE_EVENT));
 }

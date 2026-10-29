@@ -1,33 +1,18 @@
 .wrap {
   padding-block: clamp(96px, 14vw, 180px) 0;
-  color: var(--muted);
+}
+
+.wrap > :first-child {
+  padding-top: 0.9em;
 }
 
 .title {
-  margin-top: 24px;
-  color: var(--fg);
-  font-size: clamp(64px, 14vw, 200px);
-  font-weight: 500;
-  line-height: 0.9;
-  letter-spacing: -0.06em;
+  font-size: clamp(52px, 9vw, 120px);
+  line-height: 0.98;
 }
 
 .text {
   margin-top: 32px;
-  max-width: 40ch;
   font-size: 18px;
-}
-
-.button {
-  display: inline-flex;
-  margin-top: 32px;
-  padding: 16px 26px;
-  border-radius: 999px;
-  background: var(--fg);
-  color: var(--bg);
-  transition: background-color 0.4s var(--ease);
-}
-
-.button:hover {
-  background: var(--accent);
+  color: var(--ink-soft);
 }

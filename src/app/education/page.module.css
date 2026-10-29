@@ -1,88 +1,43 @@
-.section {
-  margin-top: clamp(112px, 14vw, 180px);
+.list {
+  border-bottom: 1px solid var(--line);
 }
 
-.grid {
+.list li {
+  border-top: 1px solid var(--line);
+}
+
+.row {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 12px;
+  grid-template-columns: 80px minmax(0, 1fr) auto;
+  align-items: baseline;
+  gap: 24px;
+  padding-block: 22px;
 }
 
-.card {
-  height: 100%;
-  min-height: 300px;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  padding: 28px;
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  background: color-mix(in srgb, var(--bg-elevated) 70%, transparent);
-  transition:
-    border-color 0.4s var(--ease),
-    transform 0.6s var(--ease-out);
-}
-
-.card:hover {
-  border-color: var(--line-strong);
-  transform: translateY(-6px);
-}
-
-.top {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: auto;
+.year {
+  font-size: 14px;
   color: var(--muted);
-}
-
-.seal {
-  display: grid;
-  place-items: center;
-  width: 48px;
-  height: 48px;
-  border: 1px solid var(--line-strong);
-  border-radius: 50%;
-  color: var(--accent);
-  transition: transform 1.2s var(--ease-out);
-}
-
-.card:hover .seal {
-  transform: rotate(180deg);
+  font-variant-numeric: tabular-nums;
 }
 
 .title {
-  margin-top: 40px;
-  font-size: 24px;
-  font-weight: 500;
-  line-height: 1.15;
-  letter-spacing: -0.03em;
-}
-
-.issuer {
-  font-size: 20px;
-  color: var(--muted);
-}
-
-.verify {
-  margin-top: 12px;
-  padding-top: 16px;
-  border-top: 1px solid var(--line);
-  color: var(--muted);
-  font-size: 10.5px;
+  font-size: clamp(22px, 2.4vw, 30px);
+  line-height: 1.2;
   transition: color 0.3s var(--ease);
 }
 
-.card:hover .verify {
+.row:hover .title {
   color: var(--accent);
 }
 
-@media (max-width: 900px) {
-  .grid {
-    grid-template-columns: 1fr;
-  }
+.issuer {
+  font-size: 14px;
+  color: var(--muted);
+}
 
-  .card {
-    min-height: 0;
+@media (max-width: 700px) {
+  .row {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 4px;
   }
 }

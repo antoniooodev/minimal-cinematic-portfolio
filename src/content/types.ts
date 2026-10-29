@@ -8,8 +8,8 @@ export type Link = {
 export type Profile = {
   name: string;
   role: string;
-  /** Words that rotate in the hero headline: "I build {word}". */
-  headline: string[];
+  /** Hero statement. Words wrapped in *asterisks* are set in the italic accent. */
+  headline: string;
   location: string;
   /** IANA time zone used by the live clock, e.g. "Europe/Lisbon". */
   timeZone: string;
@@ -22,17 +22,6 @@ export type Profile = {
   /** Optional link to a CV, relative to /public (e.g. "/resume.pdf") or absolute. */
   resume?: string;
   links: Link[];
-};
-
-export type Stat = {
-  value: number;
-  suffix?: string;
-  label: string;
-};
-
-export type Capability = {
-  title: string;
-  description: string;
 };
 
 export type ToolGroup = {
@@ -74,6 +63,7 @@ export type Certification = {
   url?: string;
 };
 
+export type CoverTone = "crimson" | "cocoa" | "sand" | "espresso";
 export type CoverPattern = "grid" | "rings" | "waves" | "bars" | "dots";
 
 export type Project = {
@@ -83,8 +73,8 @@ export type Project = {
   year: string;
   summary: string;
   stack: string[];
-  /** Colours and pattern of the generated cover, used when no image is set. */
-  cover: { from: string; to: string; pattern: CoverPattern };
+  /** Palette tone and pattern of the generated cover, used when no image is set. */
+  cover: { tone: CoverTone; pattern: CoverPattern };
   /** Optional cover image, relative to /public (e.g. "/projects/lumen.jpg"). */
   image?: string;
   repo?: string;

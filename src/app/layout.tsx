@@ -2,11 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Instrument_Serif } from "next/font/google";
 import { GeistMono } from "geist/font/mono";
 import { GeistSans } from "geist/font/sans";
-import { Cursor } from "@/components/effects/Cursor";
 import { RevealObserver } from "@/components/effects/RevealObserver";
-import { ScrollProgress } from "@/components/effects/ScrollProgress";
-import { SpotlightTracker } from "@/components/effects/SpotlightTracker";
-import { CommandPalette } from "@/components/layout/CommandPalette";
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
 import { profile } from "@/content/site";
@@ -35,8 +31,8 @@ export const metadata: Metadata = {
 
 export const viewport: Viewport = {
   themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#f4f3ee" },
-    { media: "(prefers-color-scheme: dark)", color: "#0d0d0c" },
+    { media: "(prefers-color-scheme: light)", color: "#f6f1e9" },
+    { media: "(prefers-color-scheme: dark)", color: "#16100e" },
   ],
 };
 
@@ -58,14 +54,10 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         <a href="#content" className="skip-link">
           Skip to content
         </a>
-        <ScrollProgress />
         <Header />
         <main id="content">{children}</main>
         <Footer />
-        <CommandPalette />
-        <Cursor />
         <RevealObserver />
-        <SpotlightTracker />
       </body>
     </html>
   );

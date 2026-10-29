@@ -1,6 +1,14 @@
-import type { Project } from "@/content/types";
+import type { CoverTone, Project } from "@/content/types";
 import { asset } from "@/lib/format";
 import styles from "./ProjectCover.module.css";
+
+/** Background, line and text colours of each palette tone. */
+const TONES: Record<CoverTone, { from: string; to: string; line: string; text: string; mark: string }> = {
+  crimson: { from: "#a7010d", to: "#7c0009", line: "rgba(246,241,233,0.28)", text: "#f6f1e9", mark: "#f6f1e9" },
+  cocoa: { from: "#7a5341", to: "#583a2c", line: "rgba(246,241,233,0.24)", text: "#f6f1e9", mark: "#dccdb9" },
+  sand: { from: "#e6dac8", to: "#d4c3ac", line: "rgba(110,75,58,0.32)", text: "#4b3a33", mark: "#a7010d" },
+  espresso: { from: "#2e201b", to: "#1a110e", line: "rgba(220,205,185,0.2)", text: "#efe7dc", mark: "#a7010d" },
+};
 
 /** Small deterministic pseudo-random generator, so covers look the same on every build. */
 function random(seed: string) {
@@ -13,63 +21,58 @@ function random(seed: string) {
   };
 }
 
-function Pattern({ project }: { project: Project }) {
+function Pattern({ project, line, mark }: { project: Project; line: string; mark: string }) {
   const rand = random(project.slug);
-  const stroke = "rgba(255,255,255,0.35)";
 
   switch (project.cover.pattern) {
     case "grid":
       return (
-        <g stroke={stroke} strokeWidth="1">
-          {Array.from({ length: 17 }, (_, i) => (
-            <line key={`v${i}`} x1={i * 25} y1="0" x2={i * 25} y2="300" />
+        <g stroke={line} strokeWidth="0.8">
+          {Array.from({ length: 11 }, (_, i) => (
+            <line key={`v${i}`} x1={i * 40} y1="0" x2={i * 40} y2="300" />
           ))}
-          {Array.from({ length: 13 }, (_, i) => (
-            <line key={`h${i}`} x1="0" y1={i * 25} x2="400" y2={i * 25} />
+          {Array.from({ length: 8 }, (_, i) => (
+            <line key={`h${i}`} x1="0" y1={i * 40} x2="400" y2={i * 40} />
           ))}
-          <rect x="150" y="75" width="125" height="125" fill="rgba(255,255,255,0.18)" stroke="none" />
+          <circle cx="280" cy="120" r="6" fill={mark} stroke="none" />
         </g>
       );
     case "rings":
       return (
-        <g fill="none" stroke={stroke} strokeWidth="1.2">
-          {Array.from({ length: 14 }, (_, i) => (
-            <circle key={i} cx="320" cy="60" r={20 + i * 26} />
+        <g fill="none" stroke={line} strokeWidth="0.8">
+          {Array.from({ length: 12 }, (_, i) => (
+            <circle key={i} cx="300" cy="90" r={18 + i * 24} />
           ))}
-          <circle cx="320" cy="60" r="20" fill="rgba(255,255,255,0.4)" stroke="none" />
+          <circle cx="300" cy="90" r="6" fill={mark} stroke="none" />
         </g>
       );
     case "waves":
       return (
-        <g fill="none" stroke={stroke} strokeWidth="1.2">
-          {Array.from({ length: 14 }, (_, i) => {
-            const y = 20 + i * 20;
-            const amp = 10 + rand() * 18;
-            return (
-              <path
-                key={i}
-                d={`M -10 ${y} C 90 ${y - amp}, 140 ${y + amp}, 200 ${y} S 320 ${y - amp}, 410 ${y}`}
-              />
-            );
+        <g fill="none" stroke={line} strokeWidth="0.8">
+          {Array.from({ length: 16 }, (_, i) => {
+            const y = 20 + i * 18;
+            const amp = 8 + rand() * 14;
+            return <path key={i} d={`M -10 ${y} C 100 ${y - amp}, 160 ${y + amp}, 220 ${y} S 340 ${y - amp}, 410 ${y}`} />;
           })}
         </g>
       );
     case "bars":
       return (
-        <g fill="rgba(255,255,255,0.22)">
-          {Array.from({ length: 16 }, (_, i) => {
-            const h = 40 + rand() * 180;
-            return <rect key={i} x={16 + i * 24} y={300 - h} width="14" height={h} rx="2" />;
+        <g fill="none" stroke={line} strokeWidth="0.8">
+          {Array.from({ length: 18 }, (_, i) => {
+            const h = 30 + rand() * 170;
+            return <line key={i} x1={30 + i * 20} y1={300} x2={30 + i * 20} y2={300 - h} />;
           })}
+          <circle cx={30 + 11 * 20} cy="70" r="6" fill={mark} stroke="none" />
         </g>
       );
     case "dots":
       return (
-        <g fill="rgba(255,255,255,0.45)">
-          {Array.from({ length: 12 }, (_, row) =>
-            Array.from({ length: 16 }, (_, col) => {
-              const r = Math.max(0.6, 5 * (1 - Math.hypot(col - 11, row - 4) / 13));
-              return <circle key={`${row}-${col}`} cx={12 + col * 25} cy={12 + row * 25} r={r} />;
+        <g fill={line}>
+          {Array.from({ length: 10 }, (_, row) =>
+            Array.from({ length: 14 }, (_, col) => {
+              const r = Math.max(0.8, 3.6 * (1 - Math.hypot(col - 10, row - 3) / 12));
+              return <circle key={`${row}-${col}`} cx={20 + col * 28} cy={20 + row * 28} r={r} />;
             }),
           )}
         </g>
@@ -80,36 +83,33 @@ function Pattern({ project }: { project: Project }) {
 type Props = {
   project: Project;
   className?: string;
-  /** Show the title and meta on top of the cover. */
+  /** Show the title and category on top of the cover. */
   labelled?: boolean;
 };
 
-/** Project artwork: the cover image when set, otherwise a generated composition. */
+/** Project artwork: the cover image when set, otherwise a composition in the site palette. */
 export function ProjectCover({ project, className, labelled = true }: Props) {
-  const { from, to } = project.cover;
+  const tone = TONES[project.cover.tone];
 
   return (
     <div
       className={`${styles.cover} ${className ?? ""}`}
-      style={{ background: `linear-gradient(135deg, ${from}, ${to})` }}
+      style={{ background: `linear-gradient(160deg, ${tone.from}, ${tone.to})`, color: tone.text }}
     >
       {project.image ? (
         // Static export: images are served as they are, without optimisation.
         // eslint-disable-next-line @next/next/no-img-element
-        <img src={asset(project.image)} alt="" className={styles.image} loading="lazy" />
+        <img src={asset(project.image)} alt="" className={styles.art} loading="lazy" />
       ) : (
         <svg className={styles.art} viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
-          <Pattern project={project} />
+          <Pattern project={project} line={tone.line} mark={tone.mark} />
         </svg>
       )}
 
       {labelled && (
         <div className={styles.overlay} aria-hidden="true">
-          <span className={`mono ${styles.meta}`}>
-            <span>{project.category}</span>
-            <span>{project.year}</span>
-          </span>
-          <span className={`serif ${styles.title}`}>{project.title}</span>
+          <span className={styles.meta}>{project.category}</span>
+          <span className={styles.title}>{project.title}</span>
         </div>
       )}
     </div>
