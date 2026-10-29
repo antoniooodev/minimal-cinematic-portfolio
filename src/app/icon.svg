@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <circle cx="32" cy="32" r="32" fill="#141413"/>
+  <circle cx="44" cy="20" r="5" fill="#ff4f1a"/>
+  <text x="29" y="43" text-anchor="middle" font-family="Georgia, serif" font-style="italic" font-size="30" fill="#f5f4ef">at</text>
+</svg>

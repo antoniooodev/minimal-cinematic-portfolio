@@ -1,0 +1,32 @@
+.toggle {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: 1px solid var(--line-strong);
+  border-radius: 50%;
+  background: transparent;
+  color: var(--fg);
+  cursor: pointer;
+  transition: border-color 0.3s var(--ease), transform 0.5s var(--ease);
+}
+
+.toggle:hover {
+  border-color: var(--fg);
+  transform: rotate(180deg);
+}
+
+/* A half-filled disc: the filled side flips with the theme. */
+.disc {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 1.5px solid currentColor;
+  background: linear-gradient(90deg, currentColor 50%, transparent 50%);
+  transition: transform 0.5s var(--ease);
+}
+
+:global([data-theme="dark"]) .disc {
+  transform: rotate(180deg);
+}

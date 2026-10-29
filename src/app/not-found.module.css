@@ -1,0 +1,22 @@
+.wrap {
+  padding-block: clamp(96px, 16vw, 200px) 0;
+  color: var(--muted);
+}
+
+.title {
+  margin-top: 24px;
+  color: var(--fg);
+  font-size: clamp(56px, 12vw, 152px);
+  font-weight: 500;
+  line-height: 0.9;
+  letter-spacing: -0.06em;
+}
+
+.text {
+  margin-top: 32px;
+  max-width: 48ch;
+}
+
+.text a {
+  color: var(--fg);
+}

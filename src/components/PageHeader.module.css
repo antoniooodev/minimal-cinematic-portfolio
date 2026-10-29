@@ -1,0 +1,40 @@
+.header {
+  padding-block: clamp(64px, 10vw, 128px) clamp(40px, 6vw, 72px);
+}
+
+.eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  color: var(--muted);
+}
+
+.index {
+  color: var(--accent);
+}
+
+.rule {
+  flex: 0 0 48px;
+  height: 1px;
+  background: var(--line-strong);
+}
+
+.title {
+  margin-top: 28px;
+  font-size: clamp(48px, 9vw, 112px);
+  font-weight: 500;
+  line-height: 0.95;
+  letter-spacing: -0.055em;
+}
+
+.title :global(.serif) {
+  letter-spacing: -0.03em;
+}
+
+.lede {
+  margin-top: 32px;
+  max-width: 52ch;
+  font-size: clamp(17px, 1.6vw, 19px);
+  color: var(--muted);
+  line-height: 1.55;
+}
