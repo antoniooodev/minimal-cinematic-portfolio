@@ -4,7 +4,7 @@ A cinematic, single-page portfolio template for developers, built with **Next.js
 
 **Live demo:** https://antoniooodev.github.io/minimal-portfolio/
 
-The page is staged like a short film: it opens with a letterbox title card, moves through numbered scenes and closes on end credits. All the content is placeholder text for a fictional developer, and the photos are demo images. Replace them and the site is yours.
+The page is staged like a short film: it opens with a letterbox title card, moves through numbered scenes and closes on end credits. The texts are placeholder copy and the photos are demo images. Replace them and the site is yours.
 
 ## Scenes
 
@@ -13,11 +13,11 @@ The page is staged like a short film: it opens with a letterbox title card, move
 | 01 | Opening | Full-screen photo with a slow push-in, the name set large, the role, a one-line pitch and the local time. |
 | 02 | About | A statement, a short bio, three principles and a portrait that opens like a curtain. |
 | 03 | Manifesto | A large statement whose words light up as you scroll, with a photo and two paragraphs. |
-| — | Skills | A crimson band with the stack scrolling by. |
+| — | Skills | A crimson band with the logos of the stack scrolling by. |
 | 04 | Work | Featured projects scroll on the left while a sticky frame shows the current one; the other projects follow in an archive list. |
 | 05 | Experience | Roles, then education and certifications. |
 | 06 | Process | Four working steps over a full-bleed photo. |
-| 07 | Contact | Email and social links, the closing credits and the copyright line. |
+| 07 | Contact | Email and social links, the closing credits, the copyright line and the design credit. |
 
 The header stays fixed: it uses "difference" blending so it reads on both dark and light scenes, underlines the section on screen and shows a film timecode that runs from `00:00:00:00` at the top to `00:03:00:00` at the credits. On small screens the links move into a full-screen menu.
 
@@ -56,7 +56,8 @@ All motion is turned off when the visitor prefers reduced motion. Without JavaSc
 2. Edit [`src/content/site.ts`](src/content/site.ts). Every text and photo on the page is set there:
    - `profile`: name, role, location and time zone, status, pitch, email, social links and an optional résumé link;
    - `photos`: the hero, about, manifesto and process photos. `position` keeps the subject in frame when the photo is cropped;
-   - `about`, `principles`, `manifesto`, `skills` and `process`: the texts of each scene. In titles, words wrapped in `*asterisks*` are set in italic crimson;
+   - `about`, `principles`, `manifesto` and `process`: the texts of each scene. In titles, words wrapped in `*asterisks*` are set in italic crimson;
+   - `skills`: the logos in the skills band. They come from [Simple Icons](https://simpleicons.org): import any icon by its `si` name (for example `siRust`) and add it to the list. Logos are drawn in a single colour to stay inside the palette;
    - `experience`, `education` and `certifications`: newest first; leave `end` empty for something still ongoing;
    - `projects`: `featured: true` puts a project in the showcase, with its `image`; the others go in the archive.
 3. Put your photos in [`public/images/`](public/images). JPEGs around 1600–2400 px wide are enough.

@@ -1,8 +1,8 @@
-import type { CSSProperties } from "react";
+import type { CSSProperties, ReactNode } from "react";
 import styles from "./Marquee.module.css";
 
 type Props = {
-  items: string[];
+  items: { key: string; node: ReactNode }[];
   /** Seconds for one full loop. */
   speed?: number;
   className?: string;
@@ -13,9 +13,8 @@ export function Marquee({ items, speed = 40, className }: Props) {
   const track = (hidden: boolean) => (
     <ul className={styles.track} aria-hidden={hidden || undefined}>
       {items.map((item) => (
-        <li key={item} className={styles.item}>
-          {item}
-          <span className={styles.separator} aria-hidden="true" />
+        <li key={item.key} className={styles.item}>
+          {item.node}
         </li>
       ))}
     </ul>

@@ -1,3 +1,17 @@
+import {
+  siDocker,
+  siFigma,
+  siGo,
+  siGraphql,
+  siNextdotjs,
+  siNodedotjs,
+  siPostgresql,
+  siReact,
+  siRedis,
+  siTailwindcss,
+  siTypescript,
+  siVercel,
+} from "simple-icons";
 import type {
   Certification,
   Education,
@@ -6,6 +20,7 @@ import type {
   Point,
   Profile,
   Project,
+  Skill,
   Statement,
 } from "./types";
 
@@ -13,7 +28,7 @@ import type {
 // placeholder content below with your own to make the template yours.
 
 export const profile: Profile = {
-  name: "Alex Morgan",
+  name: "Antonio Tangaro",
   role: "Full-Stack Developer",
   location: "Lisbon, Portugal",
   timeZone: "Europe/Lisbon",
@@ -55,19 +70,21 @@ export const manifesto: Statement = {
   ],
 };
 
-export const skills = [
-  "TypeScript",
-  "React",
-  "Next.js",
-  "Node.js",
-  "GraphQL",
-  "PostgreSQL",
-  "Tailwind CSS",
-  "Framer Motion",
-  "Docker",
-  "AWS",
-  "Figma",
-  "Go",
+// Logos from Simple Icons (https://simpleicons.org): import any icon by its
+// "si" name and add it here.
+export const skills: Skill[] = [
+  { name: "TypeScript", icon: siTypescript },
+  { name: "React", icon: siReact },
+  { name: "Next.js", icon: siNextdotjs },
+  { name: "Node.js", icon: siNodedotjs },
+  { name: "GraphQL", icon: siGraphql },
+  { name: "PostgreSQL", icon: siPostgresql },
+  { name: "Tailwind CSS", icon: siTailwindcss },
+  { name: "Docker", icon: siDocker },
+  { name: "Vercel", icon: siVercel },
+  { name: "Redis", icon: siRedis },
+  { name: "Figma", icon: siFigma },
+  { name: "Go", icon: siGo },
 ];
 
 export const process: Point[] = [
@@ -233,3 +250,9 @@ export const projects: Project[] = [
     repo: "https://github.com/",
   },
 ];
+
+/** Template credit shown in small type at the very end of the page. */
+export const designer = {
+  name: "Antonio Tangaro",
+  url: "https://www.antoniotangaro.dev/",
+};

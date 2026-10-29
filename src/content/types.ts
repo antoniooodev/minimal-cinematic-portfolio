@@ -1,3 +1,5 @@
+import type { SimpleIcon } from "simple-icons";
+
 export type Link = {
   label: string;
   href: string;
@@ -33,6 +35,12 @@ export type Profile = {
 export type Statement = {
   title: string;
   body: string[];
+};
+
+/** A technology shown as a logo in the skills band. Icons come from Simple Icons. */
+export type Skill = {
+  name: string;
+  icon: SimpleIcon;
 };
 
 export type Point = {

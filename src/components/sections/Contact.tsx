@@ -1,6 +1,6 @@
 import { SplitText } from "@/components/effects/SplitText";
 import { SceneLabel } from "@/components/ui/SceneLabel";
-import { profile } from "@/content/site";
+import { designer, profile } from "@/content/site";
 import styles from "./Contact.module.css";
 
 /** Contact details followed by closing credits, like the end of a film. */
@@ -70,7 +70,13 @@ export function Contact() {
           <span>
             © {year} {profile.name}
           </span>
-          <a href="#top" className="link">
+          <span className={styles.designer}>
+            Designed by{" "}
+            <a href={designer.url} target="_blank" rel="noreferrer" className="link">
+              {designer.name}
+            </a>
+          </span>
+          <a href="#top" className={`link ${styles.top}`}>
             Back to the opening ↑
           </a>
         </div>

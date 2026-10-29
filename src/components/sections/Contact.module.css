@@ -112,9 +112,9 @@
 
 .bottom {
   margin-top: clamp(80px, 10vw, 140px);
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: baseline;
   gap: 8px 24px;
   padding-block: 28px 36px;
   border-top: 1px solid var(--line);
@@ -126,7 +126,27 @@
   color: var(--fg);
 }
 
+.designer {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.top {
+  justify-self: end;
+}
+
 @media (max-width: 700px) {
+  .bottom {
+    grid-template-columns: 1fr auto;
+  }
+
+  .designer {
+    grid-column: 1 / -1;
+    grid-row: 2;
+  }
+
   .channel {
     grid-template-columns: minmax(0, 1fr) 24px;
     gap: 4px 16px;
