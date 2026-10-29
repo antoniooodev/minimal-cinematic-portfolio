@@ -81,7 +81,7 @@
   border-top: 1px solid var(--line);
 }
 
-.intro {
+.pitch {
   max-width: 34ch;
   font-size: clamp(17px, 1.5vw, 20px);
   line-height: 1.5;
@@ -110,7 +110,7 @@
     grid-template-columns: minmax(0, 1fr) auto;
   }
 
-  .intro {
+  .pitch {
     grid-column: 1 / -1;
   }
 
@@ -119,9 +119,3 @@
   }
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .image {
-    animation: none;
-    transform: none;
-  }
-}

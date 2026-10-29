@@ -28,22 +28,3 @@
   }
 }
 
-/* Without motion the strip becomes a still, centred row. */
-@media (prefers-reduced-motion: reduce) {
-  .marquee {
-    justify-content: center;
-    mask-image: none;
-  }
-
-  .track {
-    flex-shrink: 1;
-    flex-wrap: wrap;
-    justify-content: center;
-    row-gap: 24px;
-    animation: none;
-  }
-
-  .track[aria-hidden] {
-    display: none;
-  }
-}

@@ -2,7 +2,7 @@
   "name": "minimal-portfolio",
   "version": "1.0.0",
   "private": true,
-  "description": "A minimal developer portfolio built with Next.js and TypeScript.",
+  "description": "A cinematic single-page portfolio template for developers, built with Next.js and TypeScript.",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -24,5 +24,7 @@
     "eslint": "^9.39.5",
     "eslint-config-next": "^16.4.3",
     "typescript": "^5.9.3"
-  }
+  },
+  "license": "MIT",
+  "author": "Antonio Tangaro (https://www.antoniotangaro.dev/)"
 }

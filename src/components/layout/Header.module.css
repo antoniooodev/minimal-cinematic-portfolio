@@ -223,8 +223,3 @@
   }
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .timecode::before {
-    animation: none;
-  }
-}

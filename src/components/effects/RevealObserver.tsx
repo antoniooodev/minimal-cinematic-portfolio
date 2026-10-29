@@ -3,36 +3,55 @@
 import { useEffect } from "react";
 
 /**
- * Reveals every [data-reveal] element when it scrolls into view.
- * A MutationObserver picks up elements added later, such as a new route
- * or a filtered list, so components only need the data attribute.
+ * Reveals every [data-reveal] element as it scrolls into view, in both
+ * directions. When an element leaves the viewport it is reset, and
+ * data-from records the side it left from, so it comes back in from that
+ * side: from below when scrolling down, from above when scrolling up.
+ * Elements added later (a new route, a filtered list) are picked up by a
+ * MutationObserver, so components only need the data attribute.
  */
 export function RevealObserver() {
   useEffect(() => {
-    const io = new IntersectionObserver(
+    // Shows elements once they are a little inside the viewport.
+    const enter = new IntersectionObserver(
       (entries) => {
         for (const entry of entries) {
-          if (!entry.isIntersecting) continue;
-          entry.target.classList.add("is-visible");
-          io.unobserve(entry.target);
+          if (entry.isIntersecting) entry.target.classList.add("is-visible");
         }
       },
-      { threshold: 0, rootMargin: "0px 0px -2% 0px" },
+      { threshold: 0, rootMargin: "0px 0px -8% 0px" },
     );
 
+    // Resets elements only once they are completely out of view, so
+    // nothing disappears while it can still be seen.
+    const exit = new IntersectionObserver((entries) => {
+      for (const entry of entries) {
+        const element = entry.target as HTMLElement;
+        if (entry.isIntersecting || !element.classList.contains("is-visible")) continue;
+        element.dataset.from = entry.boundingClientRect.top < 0 ? "above" : "below";
+        element.dataset.seen = "";
+        element.classList.remove("is-visible");
+      }
+    });
+
+    const watched = new WeakSet<Element>();
     const scan = () => {
-      document
-        .querySelectorAll("[data-reveal]:not(.is-visible)")
-        .forEach((element) => io.observe(element));
+      document.querySelectorAll("[data-reveal]").forEach((element) => {
+        if (watched.has(element)) return;
+        watched.add(element);
+        enter.observe(element);
+        exit.observe(element);
+      });
     };
 
     scan();
-    const mo = new MutationObserver(scan);
-    mo.observe(document.body, { childList: true, subtree: true });
+    const mutations = new MutationObserver(scan);
+    mutations.observe(document.body, { childList: true, subtree: true });
 
     return () => {
-      io.disconnect();
-      mo.disconnect();
+      enter.disconnect();
+      exit.disconnect();
+      mutations.disconnect();
     };
   }, []);
 

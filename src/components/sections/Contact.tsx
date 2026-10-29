@@ -4,6 +4,7 @@ import { SceneLabel } from "@/components/ui/SceneLabel";
 import { iconEmail } from "@/content/icons";
 import { designer, profile } from "@/content/site";
 import styles from "./Contact.module.css";
+import { Arrow } from "@/components/ui/Arrow";
 
 /** Contact details followed by closing credits, like the end of a film. */
 export function Contact() {
@@ -51,8 +52,8 @@ export function Contact() {
                   <span className={`label ${styles.service}`}>{channel.label}</span>
                 )}
                 <span className={`display ${styles.handle}`}>{channel.handle}</span>
-                <span className={styles.arrow} aria-hidden="true">
-                  ↗
+                <span className={styles.arrow}>
+                  <Arrow />
                 </span>
               </a>
             </li>
@@ -91,7 +92,7 @@ export function Contact() {
             </a>
           </span>
           <a href="#top" className={`link ${styles.top}`}>
-            Back to the opening ↑
+            Back to the opening <Arrow direction="up" />
           </a>
         </div>
       </div>

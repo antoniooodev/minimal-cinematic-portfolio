@@ -3,6 +3,7 @@ import { SceneLabel } from "@/components/ui/SceneLabel";
 import { certifications, education, experience } from "@/content/site";
 import { formatPeriod } from "@/lib/format";
 import styles from "./Career.module.css";
+import { Arrow } from "@/components/ui/Arrow";
 
 type Row = {
   key: string;
@@ -90,7 +91,7 @@ export function Career() {
                 <li key={item.title} data-reveal>
                   <span className={styles.period}>{item.year}</span>
                   <a href={item.url} target="_blank" rel="noreferrer" className={`display ${styles.compactTitle} ${styles.cert}`}>
-                    {item.title} <span aria-hidden="true">↗</span>
+                    {item.title} <Arrow />
                   </a>
                   <span className={styles.org}>{item.issuer}</span>
                 </li>

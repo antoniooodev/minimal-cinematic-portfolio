@@ -248,22 +248,34 @@ img {
 
 /* ------------------------------------------------------------------
    Motion
-   [data-reveal] elements are revealed by <RevealObserver> when they
-   enter the viewport. The "js" class is set before the first paint, so
-   without JavaScript everything stays visible. --d is a delay step.
-
-   With "reduce motion" turned on (common on phones, sometimes switched
-   on by power saving), nothing moves: the same reveals become plain
-   fades, so the page still comes alive without any travel.
+   [data-reveal] elements are revealed by <RevealObserver> each time they
+   enter the viewport, from below when scrolling down and from above
+   when scrolling up (data-from). The "js" class is set before the first
+   paint, so without JavaScript everything stays visible.
+   Delays: --d is a step of 90ms; elements of the opening scene also add
+   --intro, so they wait for the title card the first time only.
    ------------------------------------------------------------------ */
 
+.intro {
+  --intro: 30;
+}
+
+.intro[data-seen] {
+  --intro: 0;
+}
+
 .js [data-reveal] {
+  --reveal-y: 64px;
   opacity: 0;
-  transform: translateY(24px);
+  transform: translate3d(0, var(--reveal-y), 0);
   transition:
-    opacity 1.2s var(--ease),
-    transform 1.2s var(--ease);
-  transition-delay: calc(var(--d, 0) * 90ms);
+    opacity 1.1s var(--ease),
+    transform 1.3s var(--ease);
+  transition-delay: calc((var(--intro, 0) + var(--d, 0)) * 90ms);
+}
+
+.js [data-reveal][data-from="above"] {
+  --reveal-y: -64px;
 }
 
 .js [data-reveal].is-visible {
@@ -271,9 +283,10 @@ img {
   transform: none;
 }
 
-/* Photos open like a curtain: a cover in the scene colour slides up and
-   away. A cover is used instead of clip-path so the photo inside stays
-   visible to lazy loading and to the IntersectionObserver. */
+/* Photos open like a curtain: a cover in the scene colour slides away,
+   upwards when scrolling down and downwards when scrolling up. A cover
+   is used instead of clip-path so the photo stays visible to lazy
+   loading and to the IntersectionObserver. */
 .js [data-reveal="clip"] {
   position: relative;
   opacity: 1;
@@ -287,18 +300,28 @@ img {
   z-index: 1;
   background: var(--bg);
   transform-origin: top;
-  transition: transform 1.6s var(--ease-cinema);
-  transition-delay: calc(var(--d, 0) * 90ms);
+  transition: transform 1.5s var(--ease-cinema);
+  transition-delay: calc((var(--intro, 0) + var(--d, 0)) * 90ms);
+}
+
+.js [data-reveal="clip"][data-from="above"]::after {
+  transform-origin: bottom;
 }
 
 .js [data-reveal="clip"].is-visible::after {
   transform: scaleY(0);
 }
 
-/* <SplitText>: each word rises from behind a mask. */
+/* <SplitText>: each word rises from behind a mask (or drops in from
+   above when scrolling up). */
 .js [data-reveal="words"] {
+  --word-y: 110%;
   opacity: 1;
   transform: none;
+}
+
+.js [data-reveal="words"][data-from="above"] {
+  --word-y: -110%;
 }
 
 .word-mask {
@@ -315,44 +338,13 @@ img {
 }
 
 .js [data-reveal="words"] .word {
-  transform: translateY(110%);
-  transition:
-    transform 1.3s var(--ease),
-    opacity 1.3s var(--ease);
-  transition-delay: calc(var(--d, 0) * 90ms + var(--w, 0) * 55ms);
+  transform: translate3d(0, var(--word-y), 0);
+  transition: transform 1.2s var(--ease);
+  transition-delay: calc((var(--intro, 0) + var(--d, 0)) * 90ms + var(--w, 0) * 55ms);
 }
 
 .js [data-reveal="words"].is-visible .word {
   transform: none;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
-  }
-
-  .js [data-reveal] {
-    transform: none;
-  }
-
-  .js [data-reveal="words"] .word {
-    opacity: 0;
-    transform: none;
-  }
-
-  .js [data-reveal="words"].is-visible .word {
-    opacity: 1;
-  }
-
-  .js [data-reveal="clip"]::after {
-    transform: none;
-    transition-property: opacity;
-  }
-
-  .js [data-reveal="clip"].is-visible::after {
-    transform: none;
-    opacity: 0;
-  }
 }
 
 .clock-colon {
@@ -365,6 +357,8 @@ img {
   }
 }
 
+/* The page keeps its motion when the device asks for less: it is the
+   point of the design. Only the flickering film grain stands still. */
 @media (prefers-reduced-motion: reduce) {
   body::after {
     animation: none;

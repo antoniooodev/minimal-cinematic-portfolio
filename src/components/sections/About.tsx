@@ -5,6 +5,7 @@ import { SceneLabel } from "@/components/ui/SceneLabel";
 import { about, photos, principles, profile } from "@/content/site";
 import { asset, pad } from "@/lib/format";
 import styles from "./About.module.css";
+import { Arrow } from "@/components/ui/Arrow";
 
 export function About() {
   return (
@@ -21,7 +22,7 @@ export function About() {
               ))}
               {profile.resume && (
                 <a href={asset(profile.resume)} className={`label link ${styles.resume}`}>
-                  Download résumé ↗
+                  Download résumé <Arrow />
                 </a>
               )}
             </div>

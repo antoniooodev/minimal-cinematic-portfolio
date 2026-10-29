@@ -15,7 +15,7 @@ export function Parallax({ children, speed = 0.12, className }: Props) {
 
   useEffect(() => {
     const element = ref.current;
-    if (!element || matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    if (!element) return;
     let frame = 0;
 
     const update = () => {

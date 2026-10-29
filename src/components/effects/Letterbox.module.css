@@ -84,38 +84,3 @@
     transform: translateY(-10px);
   }
 }
-
-/* With reduced motion the card only fades, and the bars fade away
-   together instead of sliding apart. */
-@media (prefers-reduced-motion: reduce) {
-  :global(.js) .letterbox {
-    animation: fade-out 1s ease 2.6s forwards;
-  }
-
-  .top,
-  .bottom {
-    animation: none;
-  }
-
-  .card {
-    animation-name: card-fade;
-  }
-}
-
-@keyframes fade-out {
-  to {
-    opacity: 0;
-    visibility: hidden;
-  }
-}
-
-@keyframes card-fade {
-  0%,
-  100% {
-    opacity: 0;
-  }
-  22%,
-  80% {
-    opacity: 1;
-  }
-}

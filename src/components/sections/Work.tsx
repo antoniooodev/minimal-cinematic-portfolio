@@ -8,6 +8,7 @@ import { projects } from "@/content/site";
 import type { CoverTone } from "@/content/types";
 import { pad } from "@/lib/format";
 import styles from "./Work.module.css";
+import { Arrow } from "@/components/ui/Arrow";
 
 const TONES: Record<CoverTone, string> = {
   crimson: "var(--crimson)",
@@ -77,7 +78,7 @@ export function Work() {
                   <span>{project.year}</span>
                 </p>
                 <a href={project.url ?? project.repo} target="_blank" rel="noreferrer" className={`label link ${styles.view}`}>
-                  {project.url ? "View project" : "View code"} ↗
+                  {project.url ? "View project" : "View code"} <Arrow />
                 </a>
               </li>
             ))}
@@ -117,8 +118,8 @@ export function Work() {
                     <span className={`display ${styles.rowTitle}`}>{project.title}</span>
                     <span className={styles.rowSummary}>{project.summary}</span>
                     <span className={`label ${styles.rowCategory}`}>{project.category}</span>
-                    <span className={styles.rowArrow} aria-hidden="true">
-                      ↗
+                    <span className={styles.rowArrow}>
+                      <Arrow />
                     </span>
                   </a>
                 </li>

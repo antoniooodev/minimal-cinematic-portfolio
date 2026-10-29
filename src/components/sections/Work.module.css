@@ -176,11 +176,6 @@
   transform: translate(3px, -3px);
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .shot {
-    transform: none;
-  }
-}
 
 @media (max-width: 900px) {
   .showcase {

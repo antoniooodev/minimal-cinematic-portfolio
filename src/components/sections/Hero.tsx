@@ -3,9 +3,10 @@ import { Clock } from "@/components/layout/Clock";
 import { Photo } from "@/components/ui/Photo";
 import { photos, profile } from "@/content/site";
 import styles from "./Hero.module.css";
+import { Arrow } from "@/components/ui/Arrow";
 
-// The hero waits for the opening letterbox to part before it animates in.
-const delay = (d: number) => ({ "--d": 30 + d }) as React.CSSProperties;
+// The "intro" class makes these wait for the opening title card the first time.
+const delay = (d: number) => ({ "--d": d }) as React.CSSProperties;
 
 export function Hero() {
   const [first, ...rest] = profile.name.split(" ");
@@ -18,32 +19,32 @@ export function Hero() {
 
       <div className={`container ${styles.inner}`}>
         <div className={styles.top}>
-          <p className="label" data-reveal style={delay(0)}>
+          <p className="label intro" data-reveal style={delay(0)}>
             Sc. 01 — Opening
           </p>
-          <p className={`label ${styles.status}`} data-reveal style={delay(1)}>
+          <p className={`label intro ${styles.status}`} data-reveal style={delay(1)}>
             {profile.location} / {profile.status}
           </p>
         </div>
 
         <div className={styles.title}>
-          <p className="label" data-reveal style={delay(1)}>
+          <p className="label intro" data-reveal style={delay(1)}>
             {profile.role}
           </p>
           <h1 className={`display ${styles.name}`}>
-            <SplitText text={first} delay={31} />
-            <SplitText text={`*${rest.join(" ")}*`} className={styles.last} delay={33} />
+            <SplitText text={first} className="intro" delay={1} />
+            <SplitText text={`*${rest.join(" ")}*`} className={`intro ${styles.last}`} delay={3} />
           </h1>
         </div>
 
         <div className={styles.bottom}>
-          <p className={styles.intro} data-reveal style={delay(5)}>
+          <p className={`intro ${styles.pitch}`} data-reveal style={delay(5)}>
             {profile.intro}
           </p>
-          <a href="#work" className={`label link ${styles.cta}`} data-reveal style={delay(6)}>
-            Explore work ↓
+          <a href="#work" className={`label link intro ${styles.cta}`} data-reveal style={delay(6)}>
+            Explore work <Arrow direction="down" />
           </a>
-          <p className={`label ${styles.time}`} data-reveal style={delay(7)}>
+          <p className={`label intro ${styles.time}`} data-reveal style={delay(7)}>
             Local time <Clock timeZone={profile.timeZone} />
           </p>
         </div>

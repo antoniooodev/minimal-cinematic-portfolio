@@ -12,6 +12,7 @@ export function SkillsBand() {
       </h2>
       <Marquee
         speed={40}
+        className={styles.marquee}
         items={skills.map((skill) => ({
           key: skill.name,
           node: <Logo icon={skill.icon} className={styles.logo} />,
