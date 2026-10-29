@@ -1,160 +1,287 @@
-import type { Education, Experience, Profile, Project } from "./types";
+import type {
+  Capability,
+  Certification,
+  Education,
+  Experience,
+  Profile,
+  Project,
+  Stat,
+  ToolGroup,
+} from "./types";
 
-// Every text on the site lives in this file. Edit it to update the portfolio.
+// Every text on the site lives in this file. Replace the placeholder content
+// below with your own to make the template yours.
 
 export const profile: Profile = {
-  name: "Antonio Tangaro",
-  role: "Software Developer",
-  location: "Padua, Italy",
-  timeZone: "Europe/Rome",
-  status: "Open to new opportunities",
+  name: "Alex Morgan",
+  role: "Full-Stack Developer",
+  headline: ["interfaces", "products", "design systems", "APIs"],
+  location: "Lisbon, Portugal",
+  timeZone: "Europe/Lisbon",
+  status: "Available for new projects",
+  available: true,
   intro:
-    "Computer Engineering student at the University of Padua. I build software where engineering meets learning systems: reinforcement learning, computer vision and clean, fast web interfaces.",
+    "I design and build fast, accessible web products, from the first sketch to the last millisecond of load time.",
   bio: [
-    "I like problems that sit between theory and product. Most of my work starts from a model or an algorithm and ends as something a person can actually use: a trained agent, a vision pipeline, a small web app.",
-    "Outside of coursework I ship side projects, contribute templates to the university community and design sites for people whose work deserves a quiet, well-made frame.",
+    "I am a developer who cares about the details nobody asks for: the easing of a menu, the empty state of a table, the time it takes for the first pixel to show up.",
+    "Over the last years I have worked with startups and studios to ship products used by millions of people, leading frontend teams and building the tools they rely on every day.",
   ],
+  email: "hello@example.com",
   links: [
-    { label: "GitHub", href: "https://github.com/antoniooodev" },
-    { label: "Website", href: "https://antoniotangaro.dev" },
+    { label: "GitHub", href: "https://github.com/", handle: "@username" },
+    { label: "LinkedIn", href: "https://www.linkedin.com/", handle: "in/username" },
+    { label: "X", href: "https://x.com/", handle: "@username" },
+    { label: "Dribbble", href: "https://dribbble.com/", handle: "@username" },
   ],
 };
 
-export const experience: Experience[] = [
+export const stats: Stat[] = [
+  { value: 7, suffix: "+", label: "Years of experience" },
+  { value: 40, suffix: "+", label: "Projects shipped" },
+  { value: 12, label: "Open-source packages" },
+  { value: 100, label: "Lighthouse score" },
+];
+
+export const skills = [
+  "TypeScript",
+  "React",
+  "Next.js",
+  "Node.js",
+  "GraphQL",
+  "PostgreSQL",
+  "Tailwind CSS",
+  "Docker",
+  "AWS",
+  "Figma",
+  "Rust",
+  "Go",
+];
+
+export const capabilities: Capability[] = [
   {
-    role: "Freelance Web Developer",
-    company: "Independent",
-    location: "Remote",
-    start: "2024",
-    summary:
-      "Design and development of portfolio sites and small web applications for creatives and small brands.",
-    highlights: [
-      "Delivered static, dependency-free portfolio sites with editorial layouts and smooth, accessible motion.",
-      "Built a full-stack tool that turns product photos and brand guidelines into ready-to-publish social captions.",
-      "Own every step of the work: brief, design, development, deployment and handover.",
-    ],
-    stack: ["TypeScript", "Next.js", "React", "Node.js", "CSS"],
+    title: "Frontend engineering",
+    description:
+      "Interfaces in React and Next.js that load fast, feel smooth and work for everyone, on every screen.",
   },
   {
-    role: "Machine Learning Projects",
-    company: "University of Padua",
-    companyUrl: "https://www.unipd.it",
-    location: "Padua, Italy",
+    title: "Backend & APIs",
+    description:
+      "Typed, well-documented APIs and data models in Node.js and PostgreSQL that are easy to grow.",
+  },
+  {
+    title: "Design systems",
+    description:
+      "Component libraries and tokens that keep design and code in sync as the product grows.",
+  },
+  {
+    title: "Performance",
+    description:
+      "Audits and fixes for Core Web Vitals, bundle size and rendering, measured before and after.",
+  },
+];
+
+export const toolbox: ToolGroup[] = [
+  { group: "Languages", items: ["TypeScript", "JavaScript", "Go", "Rust", "SQL"] },
+  { group: "Frontend", items: ["React", "Next.js", "Tailwind CSS", "Framer Motion", "Three.js"] },
+  { group: "Backend", items: ["Node.js", "GraphQL", "PostgreSQL", "Redis", "Prisma"] },
+  { group: "Infrastructure", items: ["AWS", "Docker", "Vercel", "GitHub Actions", "Terraform"] },
+  { group: "Design", items: ["Figma", "Design tokens", "Prototyping", "Accessibility"] },
+];
+
+export const experience: Experience[] = [
+  {
+    role: "Senior Frontend Engineer",
+    company: "Northwind Labs",
+    companyUrl: "https://example.com",
+    type: "Full-time",
+    location: "Remote",
     start: "2023",
     summary:
-      "Research-oriented projects in reinforcement learning, optimal control and computer vision, carried out alongside the degree.",
+      "Lead the frontend of a collaborative analytics platform used by more than 2,000 teams.",
     highlights: [
-      "Trained model-free RL agents for autonomous driving and racing, benchmarked against optimal-control baselines.",
-      "Built real-time detection and pose estimation pipelines in PyTorch and C++/OpenCV.",
-      "Studied Age of Information in crowdfinding networks through simulation and analysis.",
+      "Rebuilt the dashboard renderer, cutting interaction latency by 60%.",
+      "Created the design system now shared by four product teams.",
+      "Mentor three engineers and run the frontend guild.",
     ],
-    stack: ["Python", "PyTorch", "Stable-Baselines3", "C++", "OpenCV"],
+    stack: ["TypeScript", "React", "Next.js", "GraphQL", "Storybook"],
+  },
+  {
+    role: "Full-Stack Developer",
+    company: "Brightline",
+    companyUrl: "https://example.com",
+    type: "Full-time",
+    location: "Lisbon, Portugal",
+    start: "2020",
+    end: "2023",
+    summary:
+      "Built the core booking flow and internal tools of a fast-growing travel startup.",
+    highlights: [
+      "Shipped a new checkout that raised conversion by 18%.",
+      "Designed the public REST API and its documentation site.",
+      "Moved the deployment pipeline to containers and preview environments.",
+    ],
+    stack: ["Node.js", "React", "PostgreSQL", "Docker", "AWS"],
+  },
+  {
+    role: "Frontend Developer",
+    company: "Studio Parallel",
+    companyUrl: "https://example.com",
+    type: "Agency",
+    location: "Porto, Portugal",
+    start: "2018",
+    end: "2020",
+    summary:
+      "Developed websites and campaigns for cultural institutions and consumer brands.",
+    highlights: [
+      "Delivered more than 25 sites with rich motion and WebGL details.",
+      "Introduced component-driven development and visual regression tests.",
+    ],
+    stack: ["JavaScript", "Vue", "GSAP", "WebGL"],
+  },
+  {
+    role: "Freelance Developer",
+    company: "Independent",
+    type: "Freelance",
+    location: "Remote",
+    start: "2016",
+    end: "2018",
+    summary: "Websites and small web applications for local businesses and creatives.",
+    highlights: [
+      "Handled every step of the work: brief, design, development and hosting.",
+    ],
+    stack: ["HTML", "CSS", "JavaScript", "PHP"],
   },
 ];
 
 export const education: Education[] = [
   {
-    degree: "MSc in Computer Engineering",
-    school: "University of Padua",
-    schoolUrl: "https://www.unipd.it",
-    location: "Padua, Italy",
-    start: "2024",
-    summary:
-      "Master's degree focused on artificial intelligence, robotics and intelligent systems.",
+    degree: "MSc in Computer Science",
+    school: "Metropolitan University",
+    schoolUrl: "https://example.com",
+    location: "Lisbon, Portugal",
+    start: "2016",
+    end: "2018",
+    summary: "Specialisation in human-computer interaction and distributed systems.",
     highlights: [
-      "Reinforcement learning, machine learning and computer vision.",
-      "Group projects in C++ and Python with a strong focus on reproducible results.",
+      "Research on perceived performance in web interfaces.",
+      "Teaching assistant for the Web Development course.",
     ],
+    note: "Thesis: Measuring perceived speed in single-page applications",
   },
   {
-    degree: "BSc in Information Engineering",
-    school: "University of Padua",
-    schoolUrl: "https://www.unipd.it",
-    location: "Padua, Italy",
-    start: "2021",
-    end: "2024",
-    summary:
-      "Bachelor's degree covering programming, algorithms, signals, control and computer architecture.",
+    degree: "BSc in Software Engineering",
+    school: "Metropolitan University",
+    schoolUrl: "https://example.com",
+    location: "Lisbon, Portugal",
+    start: "2013",
+    end: "2016",
+    summary: "Algorithms, data structures, databases, networks and software design.",
     highlights: [
-      "Final thesis written with a LaTeX template later published for other students.",
-      "Software projects in Java, C++ and JavaScript.",
+      "Final project: a real-time collaborative whiteboard.",
+      "Member of the university programming team.",
     ],
+    note: "Graduated with honours",
   },
+];
+
+export const certifications: Certification[] = [
+  { title: "AWS Certified Developer – Associate", issuer: "Amazon Web Services", year: "2024", url: "https://example.com" },
+  { title: "Web Accessibility Specialist", issuer: "IAAP", year: "2023", url: "https://example.com" },
+  { title: "Professional Scrum Developer", issuer: "Scrum.org", year: "2021", url: "https://example.com" },
 ];
 
 export const projects: Project[] = [
   {
-    slug: "ten-tenths",
-    title: "Ten Tenths",
+    slug: "lumen",
+    title: "Lumen",
+    category: "Design system",
     year: "2026",
     summary:
-      "Pure model-free reinforcement learning that drives a GT4 race car at the limit of grip on Catalunya, within 3–4% of the minimum-time lap. No demonstrations, no reference line, no shield.",
-    stack: ["Python", "PPO", "Stable-Baselines3", "CasADi", "Gymnasium"],
-    repo: "https://github.com/antoniooodev/ten-tenths",
+      "An open-source design system with 60 accessible components, design tokens and a live playground.",
+    stack: ["TypeScript", "React", "Storybook"],
+    cover: { from: "#ff6a3d", to: "#ffb347", pattern: "rings" },
+    repo: "https://github.com/",
+    url: "https://example.com",
     featured: true,
   },
   {
-    slug: "autonomous-driving-rl",
-    title: "Autonomous Driving RL",
-    year: "2026",
+    slug: "atlas",
+    title: "Atlas",
+    category: "Web app",
+    year: "2025",
     summary:
-      "Reinforcement learning agents for autonomous driving scenarios, with a comparison of algorithms, reward designs and training setups.",
-    stack: ["Python", "PyTorch", "Gymnasium"],
-    repo: "https://github.com/antoniooodev/autonomous-driving-rl",
+      "Real-time analytics dashboard that turns millions of events into clear, shareable reports.",
+    stack: ["Next.js", "GraphQL", "PostgreSQL"],
+    cover: { from: "#3d5afe", to: "#8c9eff", pattern: "grid" },
+    url: "https://example.com",
     featured: true,
   },
   {
-    slug: "aoi-crowdfinding",
-    title: "AoI Crowdfinding",
+    slug: "relay",
+    title: "Relay",
+    category: "Open source",
     year: "2025",
     summary:
-      "Simulation and analysis of Age of Information in crowdfinding networks, measuring how fresh location updates stay as the crowd changes.",
-    stack: ["Python", "NumPy", "Simulation"],
-    repo: "https://github.com/antoniooodev/aoi_crowdfinding",
-  },
-  {
-    slug: "document-scanner",
-    title: "Document Scanner",
-    year: "2025",
-    summary:
-      "Detects a sheet of paper in a photo, corrects its perspective and returns a clean, flat scan.",
-    stack: ["C++", "OpenCV"],
-    repo: "https://github.com/antoniooodev/document-scanner",
+      "A tiny, type-safe event bus for TypeScript with zero dependencies and first-class React bindings.",
+    stack: ["TypeScript", "Node.js"],
+    cover: { from: "#00b894", to: "#55efc4", pattern: "waves" },
+    repo: "https://github.com/",
     featured: true,
   },
   {
-    slug: "object-detect-cv25",
-    title: "Object Detection CV25",
-    year: "2025",
-    summary: "Object detection system written in C++ on top of OpenCV.",
-    stack: ["C++", "OpenCV"],
-    repo: "https://github.com/antoniooodev/object-detect-cv25",
-  },
-  {
-    slug: "unipd-presentation",
-    title: "Unipd Presentation",
-    year: "2025",
-    summary:
-      "LaTeX template for thesis presentations at the Department of Information Engineering, with the required academic format and handy custom commands.",
-    stack: ["LaTeX", "Beamer"],
-    repo: "https://github.com/antoniooodev/Unipd_Presentation",
-  },
-  {
-    slug: "savorsound",
-    title: "SavorSound",
+    slug: "nimbus",
+    title: "Nimbus",
+    category: "Mobile web",
     year: "2024",
     summary:
-      "Browse, explore and control a music library from several sources through a sleek web interface.",
-    stack: ["JavaScript", "Node.js"],
-    repo: "https://github.com/antoniooodev/SavorSound",
+      "A calm weather app built as a progressive web app, with offline support and animated forecasts.",
+    stack: ["React", "PWA", "Canvas"],
+    cover: { from: "#6c5ce7", to: "#a29bfe", pattern: "dots" },
+    url: "https://example.com",
+    featured: true,
   },
   {
-    slug: "klotski",
-    title: "Klotski",
+    slug: "ledger",
+    title: "Ledger",
+    category: "Web app",
+    year: "2024",
+    summary:
+      "Personal finance tracker with bank sync, budgets and a fast keyboard-first interface.",
+    stack: ["Next.js", "Node.js", "PostgreSQL"],
+    cover: { from: "#1e272e", to: "#636e72", pattern: "bars" },
+    repo: "https://github.com/",
+  },
+  {
+    slug: "orbit",
+    title: "Orbit",
+    category: "Developer tool",
     year: "2023",
     summary:
-      "Multiplatform Klotski sliding-block puzzle with a built-in solver.",
-    stack: ["Java", "LibGDX"],
-    repo: "https://github.com/antoniooodev/klotski",
+      "Command-line tool that scaffolds, tests and deploys monorepo packages with one command.",
+    stack: ["Go", "Docker", "GitHub Actions"],
+    cover: { from: "#e84393", to: "#fd79a8", pattern: "rings" },
+    repo: "https://github.com/",
+  },
+  {
+    slug: "folio",
+    title: "Folio",
+    category: "Website",
+    year: "2022",
+    summary:
+      "Award-winning website for a contemporary art museum, with WebGL transitions and a CMS.",
+    stack: ["Vue", "WebGL", "Headless CMS"],
+    cover: { from: "#fdcb6e", to: "#e17055", pattern: "waves" },
+    url: "https://example.com",
+  },
+  {
+    slug: "pulse",
+    title: "Pulse",
+    category: "Open source",
+    year: "2021",
+    summary:
+      "Lightweight uptime monitor with status pages, alerts and a public API.",
+    stack: ["Rust", "Redis", "AWS"],
+    cover: { from: "#0984e3", to: "#00cec9", pattern: "grid" },
+    repo: "https://github.com/",
   },
 ];

@@ -1,0 +1,69 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.cover {
+  transition: border-radius 0.6s var(--ease-out);
+}
+
+.card:hover .cover {
+  border-radius: calc(var(--radius) * 2.5);
+}
+
+.card:hover .cover svg,
+.card:hover .cover img {
+  transform: scale(1.06);
+}
+
+.body {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.title {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  font-size: clamp(24px, 2.6vw, 34px);
+  font-weight: 500;
+  letter-spacing: -0.035em;
+}
+
+.arrow {
+  display: inline-block;
+  font-size: 20px;
+  color: var(--faint);
+  transition:
+    color 0.3s var(--ease),
+    transform 0.6s var(--ease-out);
+}
+
+.card:hover .arrow {
+  color: var(--accent);
+  transform: translate(3px, -3px) rotate(45deg);
+}
+
+.summary {
+  max-width: 54ch;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.55;
+}
+
+.stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 6px;
+}
+
+.stack span {
+  padding: 4px 10px;
+  border: 1px solid var(--line-strong);
+  border-radius: 999px;
+  font-size: 10px;
+  color: var(--muted);
+}

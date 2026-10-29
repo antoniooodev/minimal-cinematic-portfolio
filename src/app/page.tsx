@@ -1,55 +1,79 @@
 import Link from "next/link";
-import { Clock } from "@/components/Clock";
-import { education, experience, profile, projects } from "@/content/site";
+import { Counter } from "@/components/effects/Counter";
+import { DotField } from "@/components/effects/DotField";
+import { Magnetic } from "@/components/effects/Magnetic";
+import { Marquee } from "@/components/effects/Marquee";
+import { RotatingWords } from "@/components/effects/RotatingWords";
+import { ScrollText } from "@/components/effects/ScrollText";
+import { SplitText } from "@/components/effects/SplitText";
+import { Clock } from "@/components/layout/Clock";
+import { ProjectCard } from "@/components/ui/ProjectCard";
+import { SectionHeading } from "@/components/ui/SectionHeading";
+import { capabilities, education, experience, profile, projects, skills, stats } from "@/content/site";
 import { formatPeriod, pad } from "@/lib/format";
 import styles from "./page.module.css";
 
-const delay = (i: number) => ({ "--i": i }) as React.CSSProperties;
+const delay = (d: number) => ({ "--d": d }) as React.CSSProperties;
 
 export default function HomePage() {
-  const [firstName, ...rest] = profile.name.split(" ");
-  const featured = projects.filter((project) => project.featured);
-
-  const sections = [
-    {
+  const [firstName, ...lastName] = profile.name.split(" ");
+  const featured = projects.filter((project) => project.featured).slice(0, 4);
+  const journey = [
+    ...experience.slice(0, 3).map((item) => ({
+      period: formatPeriod(item.start, item.end),
+      title: item.role,
+      org: item.company,
       href: "/experience/",
-      label: "Experience",
-      count: experience.length,
-      latest: `${experience[0].role}, ${formatPeriod(experience[0].start, experience[0].end)}`,
-    },
-    {
+    })),
+    ...education.slice(0, 1).map((item) => ({
+      period: formatPeriod(item.start, item.end),
+      title: item.degree,
+      org: item.school,
       href: "/education/",
-      label: "Education",
-      count: education.length,
-      latest: `${education[0].degree}, ${education[0].school}`,
-    },
-    {
-      href: "/projects/",
-      label: "Projects",
-      count: projects.length,
-      latest: `${projects[0].title}, ${projects[0].year}`,
-    },
+    })),
   ];
 
   return (
     <>
-      <section className={`container ${styles.hero}`}>
-        <p className={`mono reveal ${styles.status}`} style={delay(0)}>
-          <span className={styles.dot} aria-hidden="true" />
-          {profile.status}
-        </p>
+      {/* ---------- Hero ---------- */}
+      <section className={styles.hero}>
+        <DotField />
+        <div className={`container ${styles.heroInner}`}>
+          <p className={`mono ${styles.status}`} data-reveal>
+            <span className={styles.pulse} aria-hidden="true" />
+            {profile.status}
+          </p>
 
-        <h1 className={styles.name}>
-          <span className="reveal" style={delay(1)}>
-            {firstName}
-          </span>
-          <span className={`serif reveal ${styles.surname}`} style={delay(2)}>
-            {rest.join(" ")}
-          </span>
-        </h1>
+          <h1 className={styles.name}>
+            <SplitText text={firstName} className={styles.first} delay={1} />
+            <SplitText text={lastName.join(" ")} className={`serif ${styles.last}`} delay={2} />
+          </h1>
 
-        <div className={styles.intro}>
-          <dl className={`reveal ${styles.facts}`} style={delay(3)}>
+          <div className={styles.heroBottom}>
+            <p className={styles.headline} data-reveal style={delay(5)}>
+              I build <RotatingWords words={profile.headline} />
+              <br />
+              <span className={styles.muted}>for the web.</span>
+            </p>
+
+            <div className={styles.heroAside} data-reveal style={delay(6)}>
+              <p className={styles.intro}>{profile.intro}</p>
+              <div className={styles.ctas}>
+                <Magnetic>
+                  <Link href="/projects/" className={styles.primary}>
+                    View projects <span aria-hidden="true">→</span>
+                  </Link>
+                </Magnetic>
+                <Magnetic>
+                  <a href={`mailto:${profile.email}`} className={styles.secondary}>
+                    Get in touch
+                  </a>
+                </Magnetic>
+              </div>
+            </div>
+          </div>
+
+          <dl className={styles.facts} data-reveal style={delay(7)}>
             <div>
               <dt className="mono">Role</dt>
               <dd>{profile.role}</dd>
@@ -64,74 +88,118 @@ export default function HomePage() {
                 <Clock timeZone={profile.timeZone} />
               </dd>
             </div>
+            <div className={styles.scroll}>
+              <dt className="mono">Scroll</dt>
+              <dd aria-hidden="true">
+                <span className={styles.scrollLine} />
+              </dd>
+            </div>
           </dl>
-          <p className={`reveal ${styles.lede}`} style={delay(4)}>
-            {profile.intro}
-          </p>
         </div>
       </section>
 
-      <section className={`container ${styles.section}`} aria-labelledby="index-title">
-        <h2 id="index-title" className={`mono reveal ${styles.label}`} style={delay(5)}>
-          Index
-        </h2>
-        <ol className={styles.index}>
-          {sections.map((section, i) => (
-            <li key={section.href} className="reveal" style={delay(6 + i)}>
-              <Link href={section.href} className={styles.indexRow}>
-                <span className={`mono ${styles.indexNumber}`}>{pad(i + 1)}</span>
-                <span className={styles.indexLabel}>{section.label}</span>
-                <span className={styles.indexLatest}>{section.latest}</span>
-                <span className={`mono ${styles.indexCount}`}>({pad(section.count)})</span>
-                <span className={styles.indexArrow} aria-hidden="true">
+      {/* ---------- Skills marquee ---------- */}
+      <section className={styles.band} aria-label="Skills">
+        <Marquee items={skills} speed={45} className={styles.marqueeBig} />
+        <Marquee
+          items={capabilities.map((c) => c.title)}
+          speed={35}
+          reverse
+          className={`mono ${styles.marqueeSmall}`}
+        />
+      </section>
+
+      {/* ---------- About ---------- */}
+      <section className={`container ${styles.section}`} aria-labelledby="about-title">
+        <SectionHeading index="01" label="About" title="A little" accent="about me" />
+        <div className={styles.about}>
+          <ScrollText text={profile.bio[0]} className={styles.aboutLead} />
+          <div className={styles.aboutSide}>
+            {profile.bio.slice(1).map((paragraph) => (
+              <p key={paragraph} data-reveal>
+                {paragraph}
+              </p>
+            ))}
+            {profile.resume && (
+              <a href={profile.resume} className="mono link" data-reveal>
+                Download résumé ↗
+              </a>
+            )}
+          </div>
+        </div>
+
+        <dl className={styles.stats}>
+          {stats.map((stat, i) => (
+            <div key={stat.label} className={styles.stat} data-reveal style={delay(i)}>
+              <dt className={`mono ${styles.statLabel}`}>{stat.label}</dt>
+              <dd className={styles.statValue}>
+                <Counter value={stat.value} suffix={stat.suffix} />
+              </dd>
+            </div>
+          ))}
+        </dl>
+      </section>
+
+      {/* ---------- Selected work ---------- */}
+      <section className={`container ${styles.section}`} aria-labelledby="work-title">
+        <SectionHeading
+          index="02"
+          label="Selected work"
+          title="Featured"
+          accent="projects"
+          action={{ href: "/projects/", label: `All projects (${pad(projects.length)})` }}
+        />
+        <ul className={styles.work}>
+          {featured.map((project, i) => (
+            <li key={project.slug} data-reveal style={delay(i % 2)}>
+              <ProjectCard project={project} />
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      {/* ---------- Capabilities ---------- */}
+      <section className={`container ${styles.section}`} aria-labelledby="services-title">
+        <SectionHeading index="03" label="Capabilities" title="What I" accent="do best" />
+        <ul className={styles.capabilities}>
+          {capabilities.map((capability, i) => (
+            <li
+              key={capability.title}
+              className={`spotlight ${styles.capability}`}
+              data-reveal
+              style={delay(i)}
+            >
+              <span className={`serif ${styles.capabilityIndex}`}>{pad(i + 1)}</span>
+              <h3 className={styles.capabilityTitle}>{capability.title}</h3>
+              <p className={styles.capabilityText}>{capability.description}</p>
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      {/* ---------- Journey ---------- */}
+      <section className={`container ${styles.section}`} aria-labelledby="journey-title">
+        <SectionHeading
+          index="04"
+          label="Journey"
+          title="Where I've"
+          accent="been"
+          action={{ href: "/experience/", label: "Full experience" }}
+        />
+        <ol className={styles.journey}>
+          {journey.map((item, i) => (
+            <li key={`${item.org}-${item.title}`} data-reveal style={delay(i)}>
+              <Link href={item.href} className={styles.journeyRow}>
+                <span className={`mono ${styles.journeyPeriod}`}>{item.period}</span>
+                <span className={styles.journeyTitle}>{item.title}</span>
+                <span className={`serif ${styles.journeyOrg}`}>{item.org}</span>
+                <span className={styles.journeyArrow} aria-hidden="true">
                   →
                 </span>
               </Link>
             </li>
           ))}
         </ol>
-      </section>
-
-      <section className={`container ${styles.section}`} aria-labelledby="featured-title">
-        <div className={styles.sectionHead}>
-          <h2 id="featured-title" className={`mono ${styles.label}`}>
-            Featured work
-          </h2>
-          <Link href="/projects/" className="mono link">
-            All projects →
-          </Link>
-        </div>
-        <ul className={styles.cards}>
-          {featured.map((project, i) => (
-            <li key={project.slug}>
-              <a
-                href={project.url ?? project.repo}
-                className={styles.card}
-                target="_blank"
-                rel="noreferrer"
-              >
-                <span className={`mono ${styles.cardMeta}`}>
-                  <span>{pad(i + 1)}</span>
-                  <span>{project.year}</span>
-                </span>
-                <span className={styles.cardTitle}>{project.title}</span>
-                <span className={styles.cardSummary}>{project.summary}</span>
-                <span className={`mono ${styles.cardStack}`}>{project.stack.slice(0, 3).join(" · ")}</span>
-              </a>
-            </li>
-          ))}
-        </ul>
-      </section>
-
-      <section className={`container ${styles.section} ${styles.about}`} aria-labelledby="about-title">
-        <h2 id="about-title" className={`mono ${styles.label}`}>
-          About
-        </h2>
-        <div className={styles.bio}>
-          {profile.bio.map((paragraph) => (
-            <p key={paragraph}>{paragraph}</p>
-          ))}
-        </div>
       </section>
     </>
   );

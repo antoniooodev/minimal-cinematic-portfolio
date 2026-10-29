@@ -1,0 +1,235 @@
+.timeline {
+  --rail: 220px;
+  position: relative;
+}
+
+.list {
+  position: relative;
+  display: grid;
+  gap: 24px;
+}
+
+/* The rail and its filled part, drawn between the period column and the cards. */
+.list::before,
+.list::after {
+  content: "";
+  position: absolute;
+  top: 8px;
+  bottom: 0;
+  left: calc(var(--rail) - 20px);
+  width: 1px;
+  background: var(--line-strong);
+}
+
+.list::after {
+  background: var(--accent);
+  transform: scaleY(var(--progress, 0));
+  transform-origin: top;
+}
+
+.item {
+  display: grid;
+  grid-template-columns: var(--rail) 1fr;
+}
+
+.aside {
+  position: relative;
+  padding: 26px 40px 0 0;
+}
+
+.node {
+  position: absolute;
+  top: 31px;
+  left: calc(var(--rail) - 25px);
+  z-index: 1;
+  width: 11px;
+  height: 11px;
+  border: 1px solid var(--line-strong);
+  border-radius: 50%;
+  background: var(--bg);
+  transition:
+    background-color 0.6s var(--ease) 0.3s,
+    border-color 0.6s var(--ease) 0.3s,
+    box-shadow 0.6s var(--ease) 0.3s;
+}
+
+.item:global(.is-visible) .node {
+  border-color: var(--accent);
+  background: var(--accent);
+  box-shadow: 0 0 0 5px var(--accent-soft);
+}
+
+.period {
+  color: var(--fg);
+}
+
+.location {
+  margin-top: 4px;
+  color: var(--faint);
+  font-size: 10.5px;
+}
+
+.card {
+  padding: clamp(24px, 3vw, 40px);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: color-mix(in srgb, var(--bg-elevated) 70%, transparent);
+  transition:
+    border-color 0.4s var(--ease),
+    transform 0.6s var(--ease-out);
+}
+
+.card:hover {
+  border-color: var(--line-strong);
+}
+
+.head {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: start;
+  gap: 18px;
+}
+
+.logo {
+  display: grid;
+  place-items: center;
+  width: 52px;
+  height: 52px;
+  border-radius: 12px;
+  background: var(--fg);
+  color: var(--bg);
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 22px;
+  transition:
+    background-color 0.4s var(--ease),
+    transform 0.6s var(--ease-out);
+}
+
+.card:hover .logo {
+  background: var(--accent);
+  transform: rotate(-8deg);
+}
+
+.title {
+  font-size: clamp(22px, 2.4vw, 30px);
+  font-weight: 500;
+  line-height: 1.15;
+  letter-spacing: -0.03em;
+}
+
+.org {
+  margin-top: 2px;
+  font-size: clamp(18px, 1.8vw, 22px);
+  color: var(--muted);
+}
+
+.badge {
+  padding: 5px 10px;
+  border-radius: 999px;
+  background: var(--accent-soft);
+  color: var(--accent);
+  font-size: 10px;
+  white-space: nowrap;
+}
+
+.summary {
+  margin-top: 24px;
+  max-width: 62ch;
+  font-size: 17px;
+}
+
+.highlights {
+  margin-top: 16px;
+  display: grid;
+  gap: 10px;
+  max-width: 62ch;
+  color: var(--muted);
+}
+
+.highlights li {
+  position: relative;
+  padding-left: 24px;
+}
+
+.highlights li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.8em;
+  width: 12px;
+  height: 1px;
+  background: var(--accent);
+}
+
+.note {
+  margin-top: 20px;
+  font-size: 20px;
+  color: var(--fg);
+}
+
+.tags {
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 1px solid var(--line);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.tags li {
+  padding: 5px 11px;
+  border: 1px solid var(--line-strong);
+  border-radius: 999px;
+  font-size: 10.5px;
+  color: var(--muted);
+  transition:
+    color 0.3s var(--ease),
+    border-color 0.3s var(--ease);
+}
+
+.tags li:hover {
+  color: var(--fg);
+  border-color: var(--fg);
+}
+
+@media (max-width: 860px) {
+  .timeline {
+    --rail: 28px;
+  }
+
+  .item {
+    grid-template-columns: 1fr;
+    padding-left: var(--rail);
+  }
+
+  .list::before,
+  .list::after {
+    left: 5px;
+  }
+
+  .aside {
+    padding: 0 0 12px;
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+  }
+
+  .node {
+    top: 3px;
+    left: calc(-1 * var(--rail));
+  }
+
+  .location {
+    margin-top: 0;
+  }
+
+  .head {
+    grid-template-columns: auto 1fr;
+  }
+
+  .badge {
+    grid-column: 1 / -1;
+    justify-self: start;
+  }
+}

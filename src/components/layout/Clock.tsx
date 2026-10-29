@@ -2,21 +2,14 @@
 
 import { useEffect, useState } from "react";
 
-type Props = {
-  timeZone: string;
-  className?: string;
-};
-
 function formatTime(timeZone: string) {
-  return new Intl.DateTimeFormat("en-GB", {
-    timeZone,
-    hour: "2-digit",
-    minute: "2-digit",
-  }).format(new Date());
+  return new Intl.DateTimeFormat("en-GB", { timeZone, hour: "2-digit", minute: "2-digit" }).format(
+    new Date(),
+  );
 }
 
 /** Live local time. Renders a placeholder on the server to avoid a hydration mismatch. */
-export function Clock({ timeZone, className }: Props) {
+export function Clock({ timeZone, className }: { timeZone: string; className?: string }) {
   const [time, setTime] = useState<string | null>(null);
 
   useEffect(() => {
