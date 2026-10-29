@@ -1,79 +1,84 @@
 # Minimal portfolio
 
-A minimal, editorial portfolio template for developers, built with **Next.js** and **TypeScript**. It is exported as a static site and deployed to **GitHub Pages** on every push to `main`.
+A cinematic, single-page portfolio template for developers, built with **Next.js** and **TypeScript**. It is exported as a static site and deployed to **GitHub Pages** on every push to `main`.
 
 **Live demo:** https://antoniooodev.github.io/minimal-portfolio/
 
-All the content is placeholder text for a fictional developer. Replace it in one file and the site is yours.
+The page is staged like a short film: it opens with a letterbox title card, moves through numbered scenes and closes on end credits. All the content is placeholder text for a fictional developer, and the photos are demo images. Replace them and the site is yours.
 
-## Pages
+## Scenes
 
-| Route | Content |
-|---|---|
-| `/` | A serif statement with an accent phrase, location and live local time, selected work, a short bio with the main tools, and a career summary. |
-| `/experience` | Roles from the most recent, with period, company, summary, highlights and stack, followed by the full toolbox. |
-| `/education` | Degrees in the same layout, plus a list of certifications. |
-| `/projects` | Every project in a numbered list, filterable by category. On desktop a cover preview follows the pointer; on phones each row shows a thumbnail. |
+| # | Scene | Content |
+|---|---|---|
+| 01 | Opening | Full-screen photo with a slow push-in, the name set large, the role, a one-line pitch and the local time. |
+| 02 | About | A statement, a short bio, three principles and a portrait that opens like a curtain. |
+| 03 | Manifesto | A large statement whose words light up as you scroll, with a photo and two paragraphs. |
+| — | Skills | A crimson band with the stack scrolling by. |
+| 04 | Work | Featured projects scroll on the left while a sticky frame shows the current one; the other projects follow in an archive list. |
+| 05 | Experience | Roles, then education and certifications. |
+| 06 | Process | Four working steps over a full-bleed photo. |
+| 07 | Contact | Email and social links, the closing credits and the copyright line. |
 
-Every section follows the same two-column rhythm: a small label on the left, the content on the right. On narrow screens the columns stack.
+The header stays fixed: it uses "difference" blending so it reads on both dark and light scenes, underlines the section on screen and shows a film timecode that runs from `00:00:00:00` at the top to `00:03:00:00` at the credits. On small screens the links move into a full-screen menu.
 
 ## Design
 
-**Palette**, built on a deep crimson with a cocoa brown as its warm counterpart:
+**Palette**, built on a deep crimson with a cocoa brown as its warm counterpart. The page alternates dark "night" scenes and ivory "day" scenes:
 
-| Token | Light | Use |
+| Token | Value | Use |
 |---|---|---|
-| `--crimson` | `#A7010D` | Accent: italic emphasis, active states, details |
-| `--cocoa` | `#6E4B3A` | Contact band, project covers |
-| `--sand` | `#DCCDB9` | Accent on cocoa, project covers |
-| `--paper` | `#F6F1E9` | Background |
-| `--ink` | `#241713` | Text (espresso) |
-| `--muted` | `#86736A` | Secondary text and labels |
+| `--crimson` | `#A7010D` | Skills band, accents on ivory |
+| `--crimson-lit` | `#E0414A` | Accents on dark scenes, where the deep crimson would be too dim |
+| `--cocoa` | `#6E4B3A` | Warm brown counterpart, project backdrops |
+| `--sand` | `#DCCDB9` | Details on dark, project backdrops |
+| `--night` | `#0E0A09` | Dark scenes |
+| `--ivory` | `#ECE5DA` | Light scenes and text on dark |
+| `--ink` | `#1B1311` | Text on ivory |
 
-The dark theme uses espresso paper and ivory ink, and lifts the crimson to `#E0414A` so it stays legible.
+Photos are shown in black and white with a light warm tint, so any picture you add sits inside the palette.
 
-**Type:** [Instrument Serif](https://fonts.google.com/specimen/Instrument+Serif) for titles, with *italic* for the accent; [Geist](https://vercel.com/font) Sans for text; Geist Mono for small labels.
+**Type:** [Instrument Serif](https://fonts.google.com/specimen/Instrument+Serif) for titles, with *italic* for the accent; [Geist](https://vercel.com/font) Sans for text; Geist Mono for labels and the timecode.
 
-**Motion**, kept quiet:
+**Motion:**
 
-- titles rise word by word and sections fade in as they enter the viewport;
-- links draw their underline on hover, and the current page is marked with a crimson dot;
-- the project preview trails the pointer;
-- the light/dark switch spreads in a circle from the button where the browser supports it;
-- pages fade in on navigation.
+- a letterbox title card that parts to open the page;
+- film grain over the whole picture;
+- titles that rise word by word, and content that fades in as it enters the view;
+- photos that open like a curtain and drift with a light parallax;
+- a manifesto that lights up word by word with the scroll;
+- a sticky project frame that cross-fades between projects.
 
-All motion is turned off when the visitor prefers reduced motion, and without JavaScript the content stays visible.
-
-## Tech stack
-
-- [Next.js](https://nextjs.org) (App Router) with `output: "export"` for a fully static build
-- TypeScript in strict mode
-- CSS Modules and CSS custom properties, with no UI or animation library
-- ESLint with the Next.js Core Web Vitals rules
+All motion is turned off when the visitor prefers reduced motion. Without JavaScript the content stays visible.
 
 ## Use it as your portfolio
 
 1. Fork or copy this repository.
-2. Edit [`src/content/site.ts`](src/content/site.ts). Every text on the site lives there:
-   - `profile`: name, role, headline, location and time zone, status, intro, bio, email, social links and an optional résumé link. In the headline, words wrapped in `*asterisks*` are set in crimson italic;
-   - `toolbox`: technologies grouped by area;
+2. Edit [`src/content/site.ts`](src/content/site.ts). Every text and photo on the page is set there:
+   - `profile`: name, role, location and time zone, status, pitch, email, social links and an optional résumé link;
+   - `photos`: the hero, about, manifesto and process photos. `position` keeps the subject in frame when the photo is cropped;
+   - `about`, `principles`, `manifesto`, `skills` and `process`: the texts of each scene. In titles, words wrapped in `*asterisks*` are set in italic crimson;
    - `experience`, `education` and `certifications`: newest first; leave `end` empty for something still ongoing;
-   - `projects`: newest first. `featured: true` shows a project on the home page. Each project gets a generated cover from `cover.tone` (`crimson`, `cocoa`, `sand` or `espresso`) and `cover.pattern` (`grid`, `rings`, `waves`, `bars` or `dots`), or set `image` to a file in `public/` to use a real screenshot.
-3. Push to `main`. The workflow publishes the site to `https://<user>.github.io/<repo>/`.
+   - `projects`: `featured: true` puts a project in the showcase, with its `image`; the others go in the archive.
+3. Put your photos in [`public/images/`](public/images). JPEGs around 1600–2400 px wide are enough.
+4. Push to `main`. The workflow publishes the site to `https://<user>.github.io/<repo>/`.
 
-The content types are in [`src/content/types.ts`](src/content/types.ts), so the editor flags a missing or misspelled field. To change the colours, edit the custom properties at the top of [`src/app/globals.css`](src/app/globals.css).
+The content types are in [`src/content/types.ts`](src/content/types.ts), so the editor flags a missing or misspelled field. The section links in the header are in [`src/content/navigation.ts`](src/content/navigation.ts).
+
+The demo photos come from Unsplash; their authors are listed in [`CREDITS.md`](CREDITS.md).
 
 ## Project structure
 
 ```
 src/
-├── app/                 routes, root layout, page transition and global styles
+├── app/                 root layout, page, 404 and global styles
 ├── components/
-│   ├── effects/         scroll reveal and word-by-word titles
-│   ├── layout/          header, mobile menu, footer, theme switch, clock
-│   └── ui/              page header, section, entry list, project list and covers
-├── content/             site content and its types
-└── lib/                 formatting and theme helpers
+│   ├── effects/         letterbox, scroll reveal, word-by-word titles, scroll-lit
+│   │                    text, parallax, marquee and timecode
+│   ├── layout/          header with menu, clock
+│   ├── sections/        one component per scene
+│   └── ui/              photo and scene label
+├── content/             site content, its types and the section list
+└── lib/                 formatting helpers
 ```
 
 ## Running locally

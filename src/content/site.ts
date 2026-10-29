@@ -1,37 +1,80 @@
-import type { Certification, Education, Experience, Profile, Project, ToolGroup } from "./types";
+import type {
+  Certification,
+  Education,
+  Experience,
+  Photo,
+  Point,
+  Profile,
+  Project,
+  Statement,
+} from "./types";
 
-// Every text on the site lives in this file. Replace the placeholder content
-// below with your own to make the template yours.
+// Every text and photo on the site is set in this file. Replace the
+// placeholder content below with your own to make the template yours.
 
 export const profile: Profile = {
   name: "Alex Morgan",
   role: "Full-Stack Developer",
-  headline: "I design and build *calm, considered* products for the web.",
   location: "Lisbon, Portugal",
   timeZone: "Europe/Lisbon",
-  status: "Available for new projects",
-  available: true,
-  intro:
-    "I design and build fast, accessible web products, from the first sketch to the last millisecond of load time.",
-  bio: [
-    "I am a developer who cares about the details nobody asks for: the easing of a menu, the empty state of a table, the time it takes for the first pixel to show up.",
-    "Over the last years I have worked with startups and studios to ship products used by millions of people, leading frontend teams and building the tools they rely on every day.",
-  ],
+  status: "Available for selected projects",
+  intro: "Building fast, quiet and carefully made products for the web.",
   email: "hello@example.com",
   links: [
-    { label: "GitHub", href: "https://github.com/", handle: "@username" },
-    { label: "LinkedIn", href: "https://www.linkedin.com/", handle: "in/username" },
+    { label: "GitHub", href: "https://github.com/", handle: "github.com/username" },
+    { label: "LinkedIn", href: "https://www.linkedin.com/", handle: "linkedin.com/in/username" },
     { label: "X", href: "https://x.com/", handle: "@username" },
-    { label: "Dribbble", href: "https://dribbble.com/", handle: "@username" },
   ],
 };
 
-export const toolbox: ToolGroup[] = [
-  { group: "Languages", items: ["TypeScript", "JavaScript", "Go", "Rust", "SQL"] },
-  { group: "Frontend", items: ["React", "Next.js", "Tailwind CSS", "Framer Motion", "Three.js"] },
-  { group: "Backend", items: ["Node.js", "GraphQL", "PostgreSQL", "Redis", "Prisma"] },
-  { group: "Infrastructure", items: ["AWS", "Docker", "Vercel", "GitHub Actions", "Terraform"] },
-  { group: "Design", items: ["Figma", "Design tokens", "Prototyping", "Accessibility"] },
+export const photos: Record<"hero" | "about" | "manifesto" | "craft", Photo> = {
+  hero: { src: "/images/hero.jpg", alt: "A figure seen from behind, looking over a city in the haze", position: "55% 40%" },
+  about: { src: "/images/about.jpg", alt: "Portrait of a person reading in soft window light", position: "60% 30%" },
+  manifesto: { src: "/images/manifesto.jpg", alt: "A person in a scarf looking out at the sea", position: "50% 40%" },
+  craft: { src: "/images/craft.jpg", alt: "Close-up of the keys of an old typewriter", position: "50% 50%" },
+};
+
+export const about: Statement = {
+  title: "I turn *complex ideas* into products that feel simple.",
+  body: [
+    "Full-stack developer with seven years of experience across startups and studios, focused on performance, accessibility and clean, lasting code.",
+  ],
+};
+
+export const principles: Point[] = [
+  { title: "Performance", text: "Every millisecond is part of the experience." },
+  { title: "Clarity", text: "Interfaces that explain themselves." },
+  { title: "Craft", text: "Details nobody asks for, done anyway." },
+];
+
+export const manifesto: Statement = {
+  title: "Good software should feel *invisible*: fast, calm and quietly intentional.",
+  body: [
+    "I work where engineering meets design. A product is more than features: it is the rhythm of its motion, the weight of its type and the time it takes to answer a click.",
+    "I like small teams, honest feedback and shipping often, and I write code that the next person will be glad to read.",
+  ],
+};
+
+export const skills = [
+  "TypeScript",
+  "React",
+  "Next.js",
+  "Node.js",
+  "GraphQL",
+  "PostgreSQL",
+  "Tailwind CSS",
+  "Framer Motion",
+  "Docker",
+  "AWS",
+  "Figma",
+  "Go",
+];
+
+export const process: Point[] = [
+  { title: "Listen", text: "Understand the people, the problem and what success looks like." },
+  { title: "Shape", text: "Sketch the structure, the content and the moments that matter." },
+  { title: "Build", text: "Write clean, tested code and bring the interface to life." },
+  { title: "Refine", text: "Measure, polish and iterate until it feels effortless." },
 ];
 
 export const experience: Experience[] = [
@@ -43,45 +86,30 @@ export const experience: Experience[] = [
     location: "Remote",
     start: "2023",
     summary:
-      "Lead the frontend of a collaborative analytics platform used by more than 2,000 teams.",
-    highlights: [
-      "Rebuilt the dashboard renderer, cutting interaction latency by 60%.",
-      "Created the design system now shared by four product teams.",
-      "Mentor three engineers and run the frontend guild.",
-    ],
-    stack: ["TypeScript", "React", "Next.js", "GraphQL", "Storybook"],
+      "Leading the frontend of a collaborative analytics platform used by more than 2,000 teams; rebuilt the dashboard renderer and the shared design system.",
+    stack: ["TypeScript", "React", "Next.js", "GraphQL"],
   },
   {
     role: "Full-Stack Developer",
     company: "Brightline",
     companyUrl: "https://example.com",
     type: "Full-time",
-    location: "Lisbon, Portugal",
+    location: "Lisbon",
     start: "2020",
     end: "2023",
     summary:
-      "Built the core booking flow and internal tools of a fast-growing travel startup.",
-    highlights: [
-      "Shipped a new checkout that raised conversion by 18%.",
-      "Designed the public REST API and its documentation site.",
-      "Moved the deployment pipeline to containers and preview environments.",
-    ],
-    stack: ["Node.js", "React", "PostgreSQL", "Docker", "AWS"],
+      "Built the booking flow and internal tools of a travel startup; shipped a checkout that raised conversion by 18%.",
+    stack: ["Node.js", "React", "PostgreSQL", "AWS"],
   },
   {
     role: "Frontend Developer",
     company: "Studio Parallel",
     companyUrl: "https://example.com",
     type: "Agency",
-    location: "Porto, Portugal",
+    location: "Porto",
     start: "2018",
     end: "2020",
-    summary:
-      "Developed websites and campaigns for cultural institutions and consumer brands.",
-    highlights: [
-      "Delivered more than 25 sites with rich motion and WebGL details.",
-      "Introduced component-driven development and visual regression tests.",
-    ],
+    summary: "Websites and campaigns for cultural institutions and consumer brands, with rich motion and WebGL.",
     stack: ["JavaScript", "Vue", "GSAP", "WebGL"],
   },
   {
@@ -92,9 +120,6 @@ export const experience: Experience[] = [
     start: "2016",
     end: "2018",
     summary: "Websites and small web applications for local businesses and creatives.",
-    highlights: [
-      "Handled every step of the work: brief, design, development and hosting.",
-    ],
     stack: ["HTML", "CSS", "JavaScript", "PHP"],
   },
 ];
@@ -104,29 +129,19 @@ export const education: Education[] = [
     degree: "MSc in Computer Science",
     school: "Metropolitan University",
     schoolUrl: "https://example.com",
-    location: "Lisbon, Portugal",
+    location: "Lisbon",
     start: "2016",
     end: "2018",
-    summary: "Specialisation in human-computer interaction and distributed systems.",
-    highlights: [
-      "Research on perceived performance in web interfaces.",
-      "Teaching assistant for the Web Development course.",
-    ],
-    note: "Thesis: Measuring perceived speed in single-page applications",
+    summary: "Human-computer interaction and distributed systems. Thesis on perceived performance.",
   },
   {
     degree: "BSc in Software Engineering",
     school: "Metropolitan University",
     schoolUrl: "https://example.com",
-    location: "Lisbon, Portugal",
+    location: "Lisbon",
     start: "2013",
     end: "2016",
-    summary: "Algorithms, data structures, databases, networks and software design.",
-    highlights: [
-      "Final project: a real-time collaborative whiteboard.",
-      "Member of the university programming team.",
-    ],
-    note: "Graduated with honours",
+    summary: "Algorithms, databases, networks and software design. Graduated with honours.",
   },
 ];
 
@@ -142,23 +157,20 @@ export const projects: Project[] = [
     title: "Lumen",
     category: "Design system",
     year: "2026",
-    summary:
-      "An open-source design system with 60 accessible components, design tokens and a live playground.",
+    summary: "An open-source design system with sixty accessible components, design tokens and a live playground.",
     stack: ["TypeScript", "React", "Storybook"],
-    cover: { tone: "crimson", pattern: "rings" },
+    image: { src: "/images/project-lumen.jpg", alt: "Laptop on a wooden table at night" },
     repo: "https://github.com/",
-    url: "https://example.com",
     featured: true,
   },
   {
     slug: "atlas",
     title: "Atlas",
-    category: "Web app",
+    category: "Analytics platform",
     year: "2025",
-    summary:
-      "Real-time analytics dashboard that turns millions of events into clear, shareable reports.",
+    summary: "Real-time dashboards that turn millions of events into clear, shareable reports.",
     stack: ["Next.js", "GraphQL", "PostgreSQL"],
-    cover: { tone: "espresso", pattern: "grid" },
+    image: { src: "/images/project-atlas.jpg", alt: "Laptop and a notebook with sketches seen from above" },
     url: "https://example.com",
     featured: true,
   },
@@ -167,22 +179,20 @@ export const projects: Project[] = [
     title: "Relay",
     category: "Open source",
     year: "2025",
-    summary:
-      "A tiny, type-safe event bus for TypeScript with zero dependencies and first-class React bindings.",
+    summary: "A tiny, type-safe event bus for TypeScript with zero dependencies and first-class React bindings.",
     stack: ["TypeScript", "Node.js"],
-    cover: { tone: "sand", pattern: "waves" },
+    image: { src: "/images/project-relay.jpg", alt: "Hand on a mouse next to a keyboard and a mug" },
     repo: "https://github.com/",
     featured: true,
   },
   {
     slug: "nimbus",
     title: "Nimbus",
-    category: "Mobile web",
+    category: "Progressive web app",
     year: "2024",
-    summary:
-      "A calm weather app built as a progressive web app, with offline support and animated forecasts.",
+    summary: "A calm weather app with offline support and animated forecasts.",
     stack: ["React", "PWA", "Canvas"],
-    cover: { tone: "cocoa", pattern: "dots" },
+    image: { src: "/images/project-nimbus.jpg", alt: "Desk by a window with a small laptop" },
     url: "https://example.com",
     featured: true,
   },
@@ -191,10 +201,8 @@ export const projects: Project[] = [
     title: "Ledger",
     category: "Web app",
     year: "2024",
-    summary:
-      "Personal finance tracker with bank sync, budgets and a fast keyboard-first interface.",
-    stack: ["Next.js", "Node.js", "PostgreSQL"],
-    cover: { tone: "sand", pattern: "bars" },
+    summary: "Personal finance tracker with bank sync and a keyboard-first interface.",
+    stack: ["Next.js", "PostgreSQL"],
     repo: "https://github.com/",
   },
   {
@@ -202,10 +210,8 @@ export const projects: Project[] = [
     title: "Orbit",
     category: "Developer tool",
     year: "2023",
-    summary:
-      "Command-line tool that scaffolds, tests and deploys monorepo packages with one command.",
-    stack: ["Go", "Docker", "GitHub Actions"],
-    cover: { tone: "crimson", pattern: "waves" },
+    summary: "Command-line tool that scaffolds, tests and deploys monorepo packages.",
+    stack: ["Go", "Docker"],
     repo: "https://github.com/",
   },
   {
@@ -213,10 +219,8 @@ export const projects: Project[] = [
     title: "Folio",
     category: "Website",
     year: "2022",
-    summary:
-      "Award-winning website for a contemporary art museum, with WebGL transitions and a CMS.",
-    stack: ["Vue", "WebGL", "Headless CMS"],
-    cover: { tone: "cocoa", pattern: "rings" },
+    summary: "Website for a contemporary art museum, with WebGL transitions and a CMS.",
+    stack: ["Vue", "WebGL"],
     url: "https://example.com",
   },
   {
@@ -224,10 +228,8 @@ export const projects: Project[] = [
     title: "Pulse",
     category: "Open source",
     year: "2021",
-    summary:
-      "Lightweight uptime monitor with status pages, alerts and a public API.",
-    stack: ["Rust", "Redis", "AWS"],
-    cover: { tone: "espresso", pattern: "bars" },
+    summary: "Lightweight uptime monitor with status pages and alerts.",
+    stack: ["Rust", "Redis"],
     repo: "https://github.com/",
   },
 ];

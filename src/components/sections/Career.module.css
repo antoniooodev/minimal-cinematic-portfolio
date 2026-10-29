@@ -1,0 +1,98 @@
+.career {
+  padding-block: clamp(112px, 14vw, 200px);
+}
+
+.title {
+  margin-top: 24px;
+  font-size: clamp(56px, 9vw, 144px);
+  line-height: 0.95;
+}
+
+.rows {
+  margin-top: clamp(48px, 6vw, 88px);
+  border-bottom: 1px solid var(--line);
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 180px minmax(0, 1fr) minmax(0, 1fr);
+  gap: 24px 40px;
+  padding-block: 36px;
+  border-top: 1px solid var(--line);
+}
+
+.period {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.rowTitle {
+  font-size: clamp(30px, 3vw, 42px);
+  line-height: 1.05;
+}
+
+.org {
+  display: block;
+  margin-top: 6px;
+  color: var(--muted);
+}
+
+.detail {
+  display: grid;
+  gap: 14px;
+  align-content: start;
+  font-size: 16px;
+}
+
+.split {
+  margin-top: clamp(80px, 10vw, 140px);
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 40px clamp(40px, 6vw, 96px);
+}
+
+.subhead {
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--line);
+}
+
+.compact li {
+  display: grid;
+  gap: 4px;
+  padding-block: 24px;
+  border-bottom: 1px solid var(--line);
+}
+
+.compactTitle {
+  font-size: clamp(24px, 2.2vw, 30px);
+  line-height: 1.15;
+}
+
+.compactText {
+  margin-top: 6px;
+  font-size: 15px;
+  color: var(--muted);
+}
+
+.cert {
+  transition: color 0.4s var(--ease);
+}
+
+.cert:hover {
+  color: var(--accent);
+}
+
+@media (max-width: 900px) {
+  .row {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 12px;
+    padding-block: 28px;
+  }
+
+  .split {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

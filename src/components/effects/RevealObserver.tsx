@@ -17,7 +17,7 @@ export function RevealObserver() {
           io.unobserve(entry.target);
         }
       },
-      { threshold: 0.12, rootMargin: "0px 0px -6% 0px" },
+      { threshold: 0, rootMargin: "0px 0px -2% 0px" },
     );
 
     const scan = () => {

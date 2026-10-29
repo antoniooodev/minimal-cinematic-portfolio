@@ -1,0 +1,81 @@
+.letterbox {
+  display: none;
+}
+
+:global(.js) .letterbox {
+  display: block;
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  pointer-events: none;
+}
+
+.bar {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 50.5%;
+  background: var(--night);
+  animation: open 1.5s var(--ease-cinema) 1.1s forwards;
+}
+
+.top {
+  top: 0;
+  --to: -100%;
+}
+
+.bottom {
+  bottom: 0;
+  --to: 100%;
+}
+
+@keyframes open {
+  to {
+    transform: translateY(var(--to));
+  }
+}
+
+.card {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  color: var(--ivory);
+  animation: card 1.3s var(--ease) forwards;
+}
+
+.card :global(.label) {
+  color: rgba(236, 229, 218, 0.55);
+}
+
+.name {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: clamp(32px, 4vw, 48px);
+  line-height: 1;
+}
+
+@keyframes card {
+  0% {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  30%,
+  70% {
+    opacity: 1;
+    transform: none;
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :global(.js) .letterbox {
+    display: none;
+  }
+}

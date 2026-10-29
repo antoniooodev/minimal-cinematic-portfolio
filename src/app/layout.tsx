@@ -2,8 +2,8 @@ import type { Metadata, Viewport } from "next";
 import { Instrument_Serif } from "next/font/google";
 import { GeistMono } from "geist/font/mono";
 import { GeistSans } from "geist/font/sans";
+import { Letterbox } from "@/components/effects/Letterbox";
 import { RevealObserver } from "@/components/effects/RevealObserver";
-import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
 import { profile } from "@/content/site";
 import "./globals.css";
@@ -16,10 +16,7 @@ const instrumentSerif = Instrument_Serif({
 });
 
 export const metadata: Metadata = {
-  title: {
-    default: `${profile.name} — ${profile.role}`,
-    template: `%s — ${profile.name}`,
-  },
+  title: `${profile.name} — ${profile.role}`,
   description: profile.intro,
   authors: [{ name: profile.name }],
   openGraph: {
@@ -30,15 +27,12 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#f6f1e9" },
-    { media: "(prefers-color-scheme: dark)", color: "#16100e" },
-  ],
+  themeColor: "#0e0a09",
 };
 
-// Runs before the first paint: applies the stored or system theme without a
-// flash, and flags that JavaScript is on so scroll reveals can start hidden.
-const bootScript = `(function(){var d=document.documentElement;d.classList.add("js");try{var t=localStorage.getItem("theme");if(t!=="light"&&t!=="dark"){t=matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light"}d.dataset.theme=t}catch(e){}})()`;
+// Runs before the first paint and flags that JavaScript is on, so scroll
+// reveals and the opening letterbox only apply when they can play.
+const bootScript = `document.documentElement.classList.add("js")`;
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
@@ -54,9 +48,9 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         <a href="#content" className="skip-link">
           Skip to content
         </a>
+        <Letterbox />
         <Header />
-        <main id="content">{children}</main>
-        <Footer />
+        {children}
         <RevealObserver />
       </body>
     </html>

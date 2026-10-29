@@ -1,18 +1,22 @@
 .wrap {
-  padding-block: clamp(96px, 14vw, 180px) 0;
-}
-
-.wrap > :first-child {
-  padding-top: 0.9em;
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+  padding-block: calc(var(--header-h) + 40px) 80px;
 }
 
 .title {
-  font-size: clamp(52px, 9vw, 120px);
-  line-height: 0.98;
+  margin-top: 24px;
+  font-size: clamp(64px, 12vw, 180px);
+  line-height: 0.92;
 }
 
 .text {
   margin-top: 32px;
   font-size: 18px;
-  color: var(--ink-soft);
+  color: var(--muted);
+}
+
+.text a {
+  color: var(--fg);
 }

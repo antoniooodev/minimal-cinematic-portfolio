@@ -1,32 +1,43 @@
 export type Link = {
   label: string;
   href: string;
-  /** Short handle shown next to the label, e.g. "@username". */
+  /** Text shown in the contact list, e.g. "github.com/username". */
   handle?: string;
+};
+
+export type Photo = {
+  /** Path inside /public, e.g. "/images/hero.jpg". */
+  src: string;
+  alt: string;
+  /** CSS object-position, to keep the subject in frame when cropped. */
+  position?: string;
 };
 
 export type Profile = {
   name: string;
   role: string;
-  /** Hero statement. Words wrapped in *asterisks* are set in the italic accent. */
-  headline: string;
   location: string;
   /** IANA time zone used by the live clock, e.g. "Europe/Lisbon". */
   timeZone: string;
-  /** Short line shown next to the status dot. */
+  /** Short line shown in the hero next to the location. */
   status: string;
-  available: boolean;
+  /** One-line pitch under the name. */
   intro: string;
-  bio: string[];
   email: string;
   /** Optional link to a CV, relative to /public (e.g. "/resume.pdf") or absolute. */
   resume?: string;
   links: Link[];
 };
 
-export type ToolGroup = {
-  group: string;
-  items: string[];
+/** Statement plus supporting text. Words wrapped in *asterisks* are set in the italic accent. */
+export type Statement = {
+  title: string;
+  body: string[];
+};
+
+export type Point = {
+  title: string;
+  text: string;
 };
 
 export type Experience = {
@@ -39,7 +50,6 @@ export type Experience = {
   /** Leave empty for an ongoing position. */
   end?: string;
   summary: string;
-  highlights: string[];
   stack: string[];
 };
 
@@ -51,9 +61,6 @@ export type Education = {
   start: string;
   end?: string;
   summary: string;
-  highlights: string[];
-  /** Extra detail such as a grade or thesis title. */
-  note?: string;
 };
 
 export type Certification = {
@@ -64,7 +71,6 @@ export type Certification = {
 };
 
 export type CoverTone = "crimson" | "cocoa" | "sand" | "espresso";
-export type CoverPattern = "grid" | "rings" | "waves" | "bars" | "dots";
 
 export type Project = {
   slug: string;
@@ -73,11 +79,11 @@ export type Project = {
   year: string;
   summary: string;
   stack: string[];
-  /** Palette tone and pattern of the generated cover, used when no image is set. */
-  cover: { tone: CoverTone; pattern: CoverPattern };
-  /** Optional cover image, relative to /public (e.g. "/projects/lumen.jpg"). */
-  image?: string;
+  /** Screenshot or photo for featured projects. Without one, a tone is used as backdrop. */
+  image?: Photo;
+  tone?: CoverTone;
   repo?: string;
   url?: string;
+  /** Featured projects get the large sticky showcase; the others go in the archive. */
   featured?: boolean;
 };

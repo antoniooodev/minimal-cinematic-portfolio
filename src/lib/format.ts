@@ -19,8 +19,3 @@ export function asset(path: string) {
   if (/^https?:\/\//.test(path)) return path;
   return `${process.env.NEXT_PUBLIC_BASE_PATH ?? ""}${path}`;
 }
-
-/** Strips the trailing slash so "/projects/" and "/projects" compare equal. */
-export function trimSlash(path: string) {
-  return path.length > 1 ? path.replace(/\/+$/, "") : path;
-}
