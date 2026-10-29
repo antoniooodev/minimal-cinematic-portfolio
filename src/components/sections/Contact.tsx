@@ -1,5 +1,7 @@
 import { SplitText } from "@/components/effects/SplitText";
+import { Logo } from "@/components/ui/Logo";
 import { SceneLabel } from "@/components/ui/SceneLabel";
+import { iconEmail } from "@/content/icons";
 import { designer, profile } from "@/content/site";
 import styles from "./Contact.module.css";
 
@@ -7,8 +9,13 @@ import styles from "./Contact.module.css";
 export function Contact() {
   const year = new Date().getFullYear();
   const channels = [
-    { label: "Email", href: `mailto:${profile.email}`, handle: profile.email },
-    ...profile.links.map((link) => ({ label: link.label, href: link.href, handle: link.handle ?? link.label })),
+    { label: "Email", href: `mailto:${profile.email}`, handle: profile.email, icon: iconEmail },
+    ...profile.links.map((link) => ({
+      label: link.label,
+      href: link.href,
+      handle: link.handle ?? link.label,
+      icon: link.icon,
+    })),
   ];
   const credits = [
     { role: "Written and developed by", names: [profile.name] },
@@ -35,7 +42,14 @@ export function Contact() {
                 className={styles.channel}
                 {...(channel.href.startsWith("http") ? { target: "_blank", rel: "noreferrer" } : {})}
               >
-                <span className="label">{channel.label}</span>
+                {channel.icon ? (
+                  <span className={styles.service}>
+                    <Logo icon={channel.icon} className={styles.serviceLogo} />
+                    <span className="sr-only">{channel.label}</span>
+                  </span>
+                ) : (
+                  <span className={`label ${styles.service}`}>{channel.label}</span>
+                )}
                 <span className={`display ${styles.handle}`}>{channel.handle}</span>
                 <span className={styles.arrow} aria-hidden="true">
                   ↗

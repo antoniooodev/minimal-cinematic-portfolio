@@ -5,7 +5,7 @@ import { photos, profile } from "@/content/site";
 import styles from "./Hero.module.css";
 
 // The hero waits for the opening letterbox to part before it animates in.
-const delay = (d: number) => ({ "--d": 24 + d }) as React.CSSProperties;
+const delay = (d: number) => ({ "--d": 30 + d }) as React.CSSProperties;
 
 export function Hero() {
   const [first, ...rest] = profile.name.split(" ");
@@ -31,8 +31,8 @@ export function Hero() {
             {profile.role}
           </p>
           <h1 className={`display ${styles.name}`}>
-            <SplitText text={first} delay={25} />
-            <SplitText text={`*${rest.join(" ")}*`} className={styles.last} delay={27} />
+            <SplitText text={first} delay={31} />
+            <SplitText text={`*${rest.join(" ")}*`} className={styles.last} delay={33} />
           </h1>
         </div>
 

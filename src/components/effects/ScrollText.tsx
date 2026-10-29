@@ -23,7 +23,8 @@ export function ScrollText({ text, className }: { text: string; className?: stri
 
   useEffect(() => {
     const element = ref.current;
-    if (!element || matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    // Only opacity changes here, so it also runs with reduced motion.
+    if (!element) return;
     const spans = [...element.querySelectorAll<HTMLSpanElement>("[data-word]")];
     let frame = 0;
 

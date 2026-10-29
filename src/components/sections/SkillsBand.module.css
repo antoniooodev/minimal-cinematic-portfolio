@@ -1,7 +1,7 @@
 .band {
   padding-block: clamp(36px, 5vw, 56px);
-  background: var(--crimson);
-  color: var(--ivory);
+  background: var(--band-bg);
+  color: var(--band-fg);
 }
 
 /* Logos in one colour, so every brand sits quietly in the palette. */
@@ -9,7 +9,6 @@
   width: clamp(36px, 4vw, 52px);
   height: clamp(36px, 4vw, 52px);
   margin-inline: clamp(28px, 3.6vw, 52px);
-  fill: currentColor;
   opacity: 0.88;
   transition:
     opacity 0.4s var(--ease),

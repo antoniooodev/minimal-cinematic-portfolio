@@ -1,8 +1,12 @@
 /* ------------------------------------------------------------------
    Palette
-   A cinematic palette built on deep crimson (#A7010D) with cocoa brown
-   as its warm counterpart. The page alternates dark "night" scenes and
-   ivory "day" scenes; each scene sets the colours its content uses.
+   Two versions of the same film:
+   - "colour" (default): deep crimson (#A7010D) with cocoa brown as its
+     warm counterpart, on warm black and ivory;
+   - "mono": pure black and white, with crimson kept only for accents.
+   The page alternates dark "night" scenes and light "day" scenes; each
+   scene sets the colours its content uses. --light-rgb and --dark-rgb
+   are the same colours as channels, for translucent tints.
    ------------------------------------------------------------------ */
 
 :root {
@@ -14,6 +18,11 @@
   --night-raised: #18110f;
   --ivory: #ece5da;
   --ink: #1b1311;
+  --light-rgb: 236 229 218;
+  --dark-rgb: 14 10 9;
+  --band-bg: var(--crimson);
+  --band-fg: var(--ivory);
+  --film-filter: grayscale(1) sepia(0.14) contrast(1.06);
 
   --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-geist-mono), ui-monospace, "SFMono-Regular", monospace;
@@ -28,12 +37,28 @@
   color-scheme: dark;
 }
 
+:root[data-theme="mono"] {
+  --crimson: #b0000e;
+  --crimson-lit: #e5232e;
+  --cocoa: #2a2a2a;
+  --sand: #c9c9c9;
+  --night: #0a0a0a;
+  --night-raised: #161616;
+  --ivory: #f2f2f2;
+  --ink: #0a0a0a;
+  --light-rgb: 242 242 242;
+  --dark-rgb: 10 10 10;
+  --band-bg: var(--ivory);
+  --band-fg: var(--ink);
+  --film-filter: grayscale(1) contrast(1.14);
+}
+
 .scene-dark {
   --bg: var(--night);
   --fg: var(--ivory);
-  --muted: rgba(236, 229, 218, 0.58);
-  --faint: rgba(236, 229, 218, 0.32);
-  --line: rgba(236, 229, 218, 0.14);
+  --muted: rgb(var(--light-rgb) / 0.58);
+  --faint: rgb(var(--light-rgb) / 0.32);
+  --line: rgb(var(--light-rgb) / 0.14);
   /* Crimson is lifted on dark backgrounds so text in the accent stays legible. */
   --accent: var(--crimson-lit);
   background: var(--bg);
@@ -43,9 +68,9 @@
 .scene-light {
   --bg: var(--ivory);
   --fg: var(--ink);
-  --muted: rgba(27, 19, 17, 0.6);
-  --faint: rgba(27, 19, 17, 0.35);
-  --line: rgba(27, 19, 17, 0.14);
+  --muted: rgb(var(--dark-rgb) / 0.6);
+  --faint: rgb(var(--dark-rgb) / 0.35);
+  --line: rgb(var(--dark-rgb) / 0.14);
   --accent: var(--crimson);
   background: var(--bg);
   color: var(--fg);
@@ -189,9 +214,9 @@ img {
   background-size: 100% 1px;
 }
 
-/* Black and white with a hint of warmth, to sit inside the palette. */
+/* Black and white photos, with a hint of warmth in the colour version. */
 .film {
-  filter: grayscale(1) sepia(0.14) contrast(1.06);
+  filter: var(--film-filter);
 }
 
 .sr-only {
@@ -226,6 +251,10 @@ img {
    [data-reveal] elements are revealed by <RevealObserver> when they
    enter the viewport. The "js" class is set before the first paint, so
    without JavaScript everything stays visible. --d is a delay step.
+
+   With "reduce motion" turned on (common on phones, sometimes switched
+   on by power saving), nothing moves: the same reveals become plain
+   fades, so the page still comes alive without any travel.
    ------------------------------------------------------------------ */
 
 .js [data-reveal] {
@@ -242,22 +271,28 @@ img {
   transform: none;
 }
 
-/* Images open like a curtain, from the bottom edge up. The clip goes on
-   the child: a clip on the observed element itself would hide it from
-   the IntersectionObserver. */
+/* Photos open like a curtain: a cover in the scene colour slides up and
+   away. A cover is used instead of clip-path so the photo inside stays
+   visible to lazy loading and to the IntersectionObserver. */
 .js [data-reveal="clip"] {
+  position: relative;
   opacity: 1;
   transform: none;
 }
 
-.js [data-reveal="clip"] > * {
-  clip-path: inset(100% 0 0 0);
-  transition: clip-path 1.6s var(--ease-cinema);
+.js [data-reveal="clip"]::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: var(--bg);
+  transform-origin: top;
+  transition: transform 1.6s var(--ease-cinema);
   transition-delay: calc(var(--d, 0) * 90ms);
 }
 
-.js [data-reveal="clip"].is-visible > * {
-  clip-path: inset(0 0 0 0);
+.js [data-reveal="clip"].is-visible::after {
+  transform: scaleY(0);
 }
 
 /* <SplitText>: each word rises from behind a mask. */
@@ -281,12 +316,43 @@ img {
 
 .js [data-reveal="words"] .word {
   transform: translateY(110%);
-  transition: transform 1.3s var(--ease);
+  transition:
+    transform 1.3s var(--ease),
+    opacity 1.3s var(--ease);
   transition-delay: calc(var(--d, 0) * 90ms + var(--w, 0) * 55ms);
 }
 
 .js [data-reveal="words"].is-visible .word {
   transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .js [data-reveal] {
+    transform: none;
+  }
+
+  .js [data-reveal="words"] .word {
+    opacity: 0;
+    transform: none;
+  }
+
+  .js [data-reveal="words"].is-visible .word {
+    opacity: 1;
+  }
+
+  .js [data-reveal="clip"]::after {
+    transform: none;
+    transition-property: opacity;
+  }
+
+  .js [data-reveal="clip"].is-visible::after {
+    transform: none;
+    opacity: 0;
+  }
 }
 
 .clock-colon {
@@ -300,24 +366,7 @@ img {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
-  }
-
-  body::after,
-  .clock-colon {
+  body::after {
     animation: none;
-  }
-
-  .js [data-reveal],
-  .js [data-reveal="words"] .word {
-    opacity: 1;
-    transform: none;
-    transition: none;
-  }
-
-  .js [data-reveal="clip"] > * {
-    clip-path: none;
-    transition: none;
   }
 }

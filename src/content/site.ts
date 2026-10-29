@@ -1,6 +1,7 @@
 import {
   siDocker,
   siFigma,
+  siGithub,
   siGo,
   siGraphql,
   siNextdotjs,
@@ -11,7 +12,9 @@ import {
   siTailwindcss,
   siTypescript,
   siVercel,
+  siX,
 } from "simple-icons";
+import { iconLinkedin } from "./icons";
 import type {
   Certification,
   Education,
@@ -36,9 +39,9 @@ export const profile: Profile = {
   intro: "Building fast, quiet and carefully made products for the web.",
   email: "hello@example.com",
   links: [
-    { label: "GitHub", href: "https://github.com/", handle: "github.com/username" },
-    { label: "LinkedIn", href: "https://www.linkedin.com/", handle: "linkedin.com/in/username" },
-    { label: "X", href: "https://x.com/", handle: "@username" },
+    { label: "GitHub", href: "https://github.com/", handle: "github.com/username", icon: siGithub },
+    { label: "LinkedIn", href: "https://www.linkedin.com/", handle: "linkedin.com/in/username", icon: iconLinkedin },
+    { label: "X", href: "https://x.com/", handle: "@username", icon: siX },
   ],
 };
 

@@ -17,13 +17,15 @@ The page is staged like a short film: it opens with a letterbox title card, move
 | 04 | Work | Featured projects scroll on the left while a sticky frame shows the current one; the other projects follow in an archive list. |
 | 05 | Experience | Roles, then education and certifications. |
 | 06 | Process | Four working steps over a full-bleed photo. |
-| 07 | Contact | Email and social links, the closing credits, the copyright line and the design credit. |
+| 07 | Contact | Email and social links shown with their logos, the closing credits, the copyright line and the design credit. |
 
-The header stays fixed: it uses "difference" blending so it reads on both dark and light scenes, underlines the section on screen and shows a film timecode that runs from `00:00:00:00` at the top to `00:03:00:00` at the credits. On small screens the links move into a full-screen menu.
+The page opens on a "Designed by" title card that holds for about two and a half seconds before the bars part. The header stays fixed: it uses "difference" blending so it reads on both dark and light scenes, underlines the section on screen, switches between the two versions of the site and shows a film timecode that runs from `00:00:00:00` at the top to `00:03:00:00` at the credits. On small screens the links move into a full-screen menu.
 
 ## Design
 
-**Palette**, built on a deep crimson with a cocoa brown as its warm counterpart. The page alternates dark "night" scenes and ivory "day" scenes:
+The site comes in two versions, switched from the header (**B/W** / **Colour**). The choice is remembered on the next visit.
+
+**Colour** (default), built on a deep crimson with a cocoa brown as its warm counterpart. The page alternates dark "night" scenes and ivory "day" scenes:
 
 | Token | Value | Use |
 |---|---|---|
@@ -34,6 +36,8 @@ The header stays fixed: it uses "difference" blending so it reads on both dark a
 | `--night` | `#0E0A09` | Dark scenes |
 | `--ivory` | `#ECE5DA` | Light scenes and text on dark |
 | `--ink` | `#1B1311` | Text on ivory |
+
+**Black and white**: pure black (`#0A0A0A`) and white (`#F2F2F2`), with crimson kept only for the accents (italic words, the surname, links and the closing title). Photos lose their warm tint and the skills band turns white.
 
 Photos are shown in black and white with a light warm tint, so any picture you add sits inside the palette.
 
@@ -48,13 +52,13 @@ Photos are shown in black and white with a light warm tint, so any picture you a
 - a manifesto that lights up word by word with the scroll;
 - a sticky project frame that cross-fades between projects.
 
-All motion is turned off when the visitor prefers reduced motion. Without JavaScript the content stays visible.
+When the device asks for reduced motion (iOS "Reduce Motion", Android "Remove animations", often switched on by power-saving modes), nothing moves: the title card and the reveals become plain fades, the skills band stands still and the parallax is off. Without JavaScript the content stays visible.
 
 ## Use it as your portfolio
 
 1. Fork or copy this repository.
 2. Edit [`src/content/site.ts`](src/content/site.ts). Every text and photo on the page is set there:
-   - `profile`: name, role, location and time zone, status, pitch, email, social links and an optional résumé link;
+   - `profile`: name, role, location and time zone, status, pitch, email, social links and an optional résumé link. Each link can carry an `icon` (from Simple Icons, or from [`src/content/icons.ts`](src/content/icons.ts)) shown in the contact list;
    - `photos`: the hero, about, manifesto and process photos. `position` keeps the subject in frame when the photo is cropped;
    - `about`, `principles`, `manifesto` and `process`: the texts of each scene. In titles, words wrapped in `*asterisks*` are set in italic crimson;
    - `skills`: the logos in the skills band. They come from [Simple Icons](https://simpleicons.org): import any icon by its `si` name (for example `siRust`) and add it to the list. Logos are drawn in a single colour to stay inside the palette;

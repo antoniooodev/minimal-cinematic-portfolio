@@ -5,6 +5,7 @@ import { Timecode } from "@/components/effects/Timecode";
 import { navigation } from "@/content/navigation";
 import { profile } from "@/content/site";
 import { asset, initials } from "@/lib/format";
+import { toggleVersion } from "@/lib/version";
 import styles from "./Header.module.css";
 
 /** Links point at the home page so they also work from the 404 page. */
@@ -64,6 +65,16 @@ export function Header() {
             ))}
           </ul>
         </nav>
+
+        <button type="button" className={styles.version} onClick={toggleVersion}>
+          <span className="sr-only">Switch between the colour and the black and white version</span>
+          <span className={styles.toMono} aria-hidden="true">
+            B/W
+          </span>
+          <span className={styles.toColour} aria-hidden="true">
+            Colour
+          </span>
+        </button>
 
         <Timecode className={styles.timecode} />
 

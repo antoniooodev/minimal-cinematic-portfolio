@@ -27,11 +27,27 @@
 
 .channel {
   display: grid;
-  grid-template-columns: 160px minmax(0, 1fr) 32px;
-  align-items: baseline;
+  grid-template-columns: 96px minmax(0, 1fr) 32px;
+  align-items: center;
   gap: 24px;
   padding-block: 26px;
   transition: padding 0.6s var(--ease);
+}
+
+.service {
+  display: flex;
+  align-items: center;
+  color: var(--muted);
+  transition: color 0.4s var(--ease);
+}
+
+.serviceLogo {
+  width: clamp(24px, 2.4vw, 32px);
+  height: clamp(24px, 2.4vw, 32px);
+}
+
+.channel:hover .service {
+  color: var(--accent);
 }
 
 .handle {
@@ -148,12 +164,8 @@
   }
 
   .channel {
-    grid-template-columns: minmax(0, 1fr) 24px;
-    gap: 4px 16px;
-  }
-
-  .channel :global(.label) {
-    grid-column: 1 / -1;
+    grid-template-columns: 40px minmax(0, 1fr) 24px;
+    gap: 16px;
   }
 
   .roll div {

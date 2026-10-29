@@ -1,10 +1,16 @@
-import type { SimpleIcon } from "simple-icons";
+/** A single-colour logo drawn on a 24×24 grid, as provided by Simple Icons. */
+export type Icon = {
+  title: string;
+  path: string;
+};
 
 export type Link = {
   label: string;
   href: string;
   /** Text shown in the contact list, e.g. "github.com/username". */
   handle?: string;
+  /** Logo of the service, shown in the contact list instead of the label. */
+  icon?: Icon;
 };
 
 export type Photo = {
@@ -40,7 +46,7 @@ export type Statement = {
 /** A technology shown as a logo in the skills band. Icons come from Simple Icons. */
 export type Skill = {
   name: string;
-  icon: SimpleIcon;
+  icon: Icon;
 };
 
 export type Point = {

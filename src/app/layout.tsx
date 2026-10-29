@@ -30,9 +30,10 @@ export const viewport: Viewport = {
   themeColor: "#0e0a09",
 };
 
-// Runs before the first paint and flags that JavaScript is on, so scroll
-// reveals and the opening letterbox only apply when they can play.
-const bootScript = `document.documentElement.classList.add("js")`;
+// Runs before the first paint: flags that JavaScript is on, so scroll
+// reveals and the opening letterbox only apply when they can play, and
+// restores the black-and-white version if the visitor chose it.
+const bootScript = `(function(){var d=document.documentElement;d.classList.add("js");try{if(localStorage.getItem("version")==="mono")d.dataset.theme="mono"}catch(e){}})()`;
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (

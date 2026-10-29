@@ -12,7 +12,7 @@ export function Letterbox() {
       <div className={`${styles.bar} ${styles.top}`} />
       <div className={`${styles.bar} ${styles.bottom}`} />
       <p className={styles.card}>
-        <span className="label">A film by</span>
+        <span className="label">Designed by</span>
         <span className={styles.name}>{profile.name}</span>
       </p>
     </div>

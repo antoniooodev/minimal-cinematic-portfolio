@@ -18,7 +18,7 @@
   height: 100%;
   object-fit: cover;
   transform: scale(1.14);
-  animation: dolly 9s var(--ease) 1.4s forwards;
+  animation: dolly 9s var(--ease) 2.6s forwards;
 }
 
 @keyframes dolly {
@@ -33,9 +33,9 @@
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(90deg, rgba(14, 10, 9, 0.88) 0%, rgba(14, 10, 9, 0.45) 45%, rgba(14, 10, 9, 0.2) 100%),
-    linear-gradient(0deg, rgba(14, 10, 9, 0.95) 0%, rgba(14, 10, 9, 0) 45%),
-    linear-gradient(180deg, rgba(14, 10, 9, 0.6) 0%, rgba(14, 10, 9, 0) 25%);
+    linear-gradient(90deg, rgb(var(--dark-rgb) / 0.88) 0%, rgb(var(--dark-rgb) / 0.45) 45%, rgb(var(--dark-rgb) / 0.2) 100%),
+    linear-gradient(0deg, rgb(var(--dark-rgb) / 0.95) 0%, rgb(var(--dark-rgb) / 0) 45%),
+    linear-gradient(180deg, rgb(var(--dark-rgb) / 0.6) 0%, rgb(var(--dark-rgb) / 0) 25%);
 }
 
 .inner {

@@ -1,4 +1,5 @@
 import { Marquee } from "@/components/effects/Marquee";
+import { Logo } from "@/components/ui/Logo";
 import { skills } from "@/content/site";
 import styles from "./SkillsBand.module.css";
 
@@ -13,12 +14,7 @@ export function SkillsBand() {
         speed={40}
         items={skills.map((skill) => ({
           key: skill.name,
-          node: (
-            <svg className={styles.logo} viewBox="0 0 24 24" aria-hidden="true">
-              <title>{skill.name}</title>
-              <path d={skill.icon.path} />
-            </svg>
-          ),
+          node: <Logo icon={skill.icon} className={styles.logo} />,
         }))}
       />
     </section>

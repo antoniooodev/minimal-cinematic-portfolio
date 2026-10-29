@@ -176,6 +176,12 @@
   transform: translate(3px, -3px);
 }
 
+@media (prefers-reduced-motion: reduce) {
+  .shot {
+    transform: none;
+  }
+}
+
 @media (max-width: 900px) {
   .showcase {
     grid-template-columns: minmax(0, 1fr);
