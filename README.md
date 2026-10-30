@@ -1,8 +1,8 @@
-# Minimal portfolio
+# Minimal cinematic portfolio
 
 A cinematic, single-page portfolio template for developers, built with **Next.js** and **TypeScript**, exported as a static site and deployed to **GitHub Pages** on every push to `main`.
 
-### [→ Live demo](https://antoniooodev.github.io/minimal-portfolio/)
+### [→ Live demo](https://antoniooodev.github.io/minimal-cinematic-portfolio/)
 
 ![Opening scene of the portfolio](docs/screenshots/hero.jpg)
 
@@ -110,13 +110,13 @@ Pick one:
 - **Fork** the repository on GitHub (button in the top right), then clone your fork:
 
   ```bash
-  git clone https://github.com/<your-username>/minimal-portfolio.git
+  git clone https://github.com/<your-username>/minimal-cinematic-portfolio.git
   ```
 
 - **Clone** it directly:
 
   ```bash
-  git clone https://github.com/antoniooodev/minimal-portfolio.git
+  git clone https://github.com/antoniooodev/minimal-cinematic-portfolio.git
   ```
 
 - **Download** it as a ZIP from **Code → Download ZIP** and unzip it.
@@ -124,7 +124,7 @@ Pick one:
 ### 3. Install and run
 
 ```bash
-cd minimal-portfolio
+cd minimal-cinematic-portfolio
 npm install
 npm run dev
 ```
@@ -180,7 +180,7 @@ If the site is served from a custom domain or from a `<your-username>.github.io`
 ## Directory structure
 
 ```
-minimal-portfolio/
+minimal-cinematic-portfolio/
 ├── .github/workflows/
 │   └── deploy.yml            # lint, build and publish to GitHub Pages
 ├── docs/screenshots/         # images used in this README
